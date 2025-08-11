@@ -1,0 +1,88 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mohamedriadh.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to server resources)
+Crawl-delay: 1
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /backup/
+Disallow: /logs/
+Disallow: /config/
+
+# Allow important pages
+Allow: /index.html
+Allow: /contact.html
+Allow: /sites.html
+Allow: /cybersecurity.html
+Allow: /analysis.html
+Allow: /blog.html
+
+# Allow assets
+Allow: /css/
+Allow: /js/
+Allow: /image/
+
+# Block common bot patterns
+User-agent: *
+Disallow: /search?
+Disallow: /?q=
+Disallow: /?s=
+Disallow: /?query=
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Block aggressive scrapers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+# Block malicious bots
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /administrator/
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /includes/
+Disallow: /system/
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /config.php
+Disallow: /database.php
+Disallow: /settings.php 

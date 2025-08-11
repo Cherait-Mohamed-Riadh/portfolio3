@@ -1,0 +1,157 @@
+{
+    "name": "Mohamed Riadh - Cybersecurity & Financial Markets Analyst",
+    "short_name": "Mohamed Riadh",
+    "description": "Expert cybersecurity analyst and financial markets specialist. Specializing in penetration testing, cloud security, risk management, and algorithmic trading.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#081D2E",
+    "theme_color": "#081D2E",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "dir": "ltr",
+    "categories": ["business", "productivity", "education"],
+    "icons": [
+        {
+            "src": "https://placehold.co/192x192/0A1C2B/ffffff?text=MR",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://placehold.co/512x512/0A1C2B/ffffff?text=MR",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://placehold.co/180x180/0A1C2B/ffffff?text=MR",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://placehold.co/152x152/0A1C2B/ffffff?text=MR",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://placehold.co/144x144/0A1C2B/ffffff?text=MR",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://placehold.co/120x120/0A1C2B/ffffff?text=MR",
+            "sizes": "120x120",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://placehold.co/96x96/0A1C2B/ffffff?text=MR",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://placehold.co/72x72/0A1C2B/ffffff?text=MR",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://placehold.co/48x48/0A1C2B/ffffff?text=MR",
+            "sizes": "48x48",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "image/portfolio_image.jpg",
+            "sizes": "1280x720",
+            "type": "image/jpeg",
+            "form_factor": "wide",
+            "label": "Homepage of Mohamed Riadh's Portfolio"
+        },
+        {
+            "src": "image/portfolio_image.jpg",
+            "sizes": "750x1334",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Mobile view of Mohamed Riadh's Portfolio"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Contact",
+            "short_name": "Contact",
+            "description": "Get in touch with Mohamed Riadh",
+            "url": "/contact.html",
+            "icons": [
+                {
+                    "src": "https://placehold.co/96x96/0A1C2B/ffffff?text=C",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Projects",
+            "short_name": "Projects",
+            "description": "View web development projects",
+            "url": "/sites.html",
+            "icons": [
+                {
+                    "src": "https://placehold.co/96x96/0A1C2B/ffffff?text=P",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Cybersecurity",
+            "short_name": "Security",
+            "description": "Cybersecurity projects and expertise",
+            "url": "/cybersecurity.html",
+            "icons": [
+                {
+                    "src": "https://placehold.co/96x96/0A1C2B/ffffff?text=S",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "webapp",
+            "url": "https://mohamedriadh.com"
+        }
+    ],
+    "prefer_related_applications": false,
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "launch_handler": {
+        "client_mode": "focus-existing"
+    },
+    "handle_links": "preferred",
+    "capture_links": "new-client",
+    "file_handlers": [
+        {
+            "action": "/",
+            "accept": {
+                "text/plain": [".txt"],
+                "application/pdf": [".pdf"]
+            }
+        }
+    ],
+    "protocol_handlers": [
+        {
+            "protocol": "mailto",
+            "url": "/contact.html?email=%s"
+        }
+    ]
+} 

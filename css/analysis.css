@@ -1,0 +1,105 @@
+/* Main Content Area Specific Styles for Analysis Page */
+main {
+    flex-grow: 1;
+    padding: 20px 0;
+}
+
+.analysis-section {
+    padding: var(--container-padding); /* Use container-padding for consistency */
+}
+
+.analysis-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--section-heading-color);
+}
+
+.analysis-content p {
+    font-size: 1.05em; /* Consistent with other pages' paragraphs */
+    margin-bottom: 1.2em; /* Consistent with other pages' paragraph spacing */
+    color: var(--main-text-color);
+    line-height: 1.7; /* Consistent with other pages' line-height */
+    text-align: justify; /* Consistent with other pages' text alignment */
+    max-width: 800px; /* Consistent with other pages' max-width */
+    margin-left: auto; /* Center paragraphs */
+    margin-right: auto; /* Center paragraphs */
+}
+
+.analysis-points {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Consistent with project grid in index.html */
+    gap: 30px; /* Consistent with project grid in index.html */
+}
+
+.analysis-point-item {
+    background-color: var(--container-bg); /* Use container-bg for consistency */
+    border-radius: 12px; /* Consistent with project cards in index.html */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* إضافة ظل خفيف واحترافي */
+    padding: 30px; /* Consistent with project cards in index.html */
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                background-color 0.5s ease,
+                border-color 0.5s ease,
+                box-shadow 0.35s ease; /* تحديث الانتقال ليشمل الظل */
+    border: 1px solid var(--border-light); /* Consistent with project cards in index.html */
+}
+body.dark-mode .analysis-point-item {
+    border-color: #4A5C6B; /* Consistent with dark mode border color */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* ظل أغمق في الوضع الداكن */
+}
+
+.analysis-point-item:hover {
+    transform: translateY(-12px); /* Consistent with project cards hover in index.html */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* ظل أوضح عند التمرير */
+}
+body.dark-mode .analysis-point-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* ظل أغمق وأوضح عند التمرير في الوضع الداكن */
+}
+
+
+.analysis-point-item h3 {
+    font-size: 1.8em; /* Consistent with project card headings in index.html */
+    color: var(--primary-blue); /* Consistent with project card headings in index.html */
+    margin-bottom: 15px; /* Consistent with project card headings in index.html */
+    transition: color 0.5s ease;
+    font-weight: 700; /* Consistent with index.html */
+}
+body.dark-mode .analysis-point-item h3 {
+    color: #B3E0FF; /* Consistent with dark mode project card headings */
+}
+
+.analysis-point-item p {
+    font-size: 1.05em; /* Consistent with project card paragraphs in index.html */
+    color: var(--text-medium); /* Consistent with project card paragraphs in index.html */
+    transition: color 0.5s ease;
+    line-height: 1.7; /* Consistent with index.html */
+}
+
+/* Responsive Design (Adjusted for consistency across files) */
+@media (max-width: 1200px) {
+    .analysis-content p { font-size: 1.2em; } /* Adjusted for more space */
+    .analysis-points { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } /* Consistent with index.html */
+    .analysis-point-item h3 { font-size: 1.7em; } /* Consistent with index.html */
+    .analysis-point-item p { font-size: 1.0em; } /* Consistent with index.html */
+}
+
+@media (max-width: 992px) {
+    .analysis-content p { font-size: 1.1em; } /* Adjusted */
+    .analysis-points { grid-template-columns: 1fr; } /* Stack on smaller screens - Consistent with index.html */
+    .analysis-point-item h3 { font-size: 1.6em; } /* Consistent with index.html */
+    .analysis-point-item p { font-size: 0.95em; } /* Consistent with index.html */
+}
+
+@media (max-width: 768px) {
+    .analysis-content p { font-size: 1.0em; }
+    .analysis-point-item { padding: 25px; } /* Consistent with index.html */
+    .analysis-point-item h3 { font-size: 1.5em; } /* Consistent with index.html */
+    .analysis-point-item p { font-size: 0.95em; } /* Consistent with index.html */
+}
+
+@media (max-width: 480px) {
+    .analysis-content p { font-size: 0.9em; }
+    .analysis-point-item { padding: 18px; } /* Consistent with index.html */
+    .analysis-point-item h3 { font-size: 1.3em; margin-bottom: 10px; } /* Consistent with index.html */
+    .analysis-point-item p { font-size: 0.9em; margin-bottom: 18px; } /* Consistent with index.html */
+}

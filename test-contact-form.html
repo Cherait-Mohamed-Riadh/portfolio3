@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="21KVafuM_F8UGzYhm6V43HXaY3eEmT96M2-1OHKOqZs" />
+    
+    <title>Contact Form Test - Portfolio Backend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .test-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group label {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #999;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            color: #667eea;
+            background: white;
+            padding: 0 5px;
+        }
+        
+        .honeypot-field {
+            position: absolute !important;
+            left: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+            background: transparent !important;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .notification {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .notification.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .notification.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        .notification.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+        
+        .config-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .config-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .config-section input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .config-section button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .config-section button:hover {
+            background: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .test-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🧪 Contact Form Test</h1>
+            <p>Test your Google Apps Script backend before integrating</p>
+        </div>
+        
+        <form id="testForm">
+            <div class="form-group">
+                <input  id="contact-name"
+                        name="name"
+                        type="text"
+                        placeholder="Enter your name"
+                        required>
+                <label for="contact-name">Your Name</label>
+            </div>
+            
+            <div class="form-group">
+                <input  id="contact-email"
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        required>
+                <label for="contact-email">Your Email</label>
+            </div>
+            
+            <div class="form-group">
+                <input  id="contact-subject"
+                        name="subject"
+                        type="text"
+                        placeholder="Enter subject"
+                        required>
+                <label for="contact-subject">Subject</label>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="contact-message"
+                          name="message"
+                          placeholder="Enter your message"
+                          rows="6"
+                          required></textarea>
+                <label for="contact-message">Your Message</label>
+            </div>
+            
+            <!-- Honeypot field for spam protection -->
+            <div class="form-group honeypot-field">
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                <label for="website">Website</label>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <span>Send Test Message</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            </button>
+        </form>
+        
+        <div id="notification"></div>
+        
+        <div class="config-section">
+            <h3>🔧 Backend Configuration</h3>
+            <input type="text" id="backendUrl" placeholder="Enter your Google Apps Script web app URL">
+            <button onclick="updateBackendUrl()">Update Backend URL</button>
+            <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                <strong>Current URL:</strong> <span id="currentUrl">Not set</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Load saved backend URL
+        const savedUrl = localStorage.getItem('portfolioBackendUrl');
+        if (savedUrl) {
+            document.getElementById('backendUrl').value = savedUrl;
+            document.getElementById('currentUrl').textContent = savedUrl;
+        }
+
+        // Update backend URL
+        function updateBackendUrl() {
+            const url = document.getElementById('backendUrl').value.trim();
+            if (url) {
+                localStorage.setItem('portfolioBackendUrl', url);
+                document.getElementById('currentUrl').textContent = url;
+                showNotification('Backend URL updated successfully!', 'success');
+            } else {
+                showNotification('Please enter a valid URL', 'error');
+            }
+        }
+
+        // Form submission
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const backendUrl = localStorage.getItem('portfolioBackendUrl');
+            if (!backendUrl) {
+                showNotification('Please set your backend URL first', 'error');
+                return;
+            }
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<span>Sending...</span>';
+            submitBtn.disabled = true;
+            
+            try {
+                // Prepare form data
+                const formData = new FormData(this);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    if (key !== 'website') { // Exclude honeypot
+                        formObject[key] = value;
+                    }
+                });
+                
+                // Send to backend
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    body: JSON.stringify(formObject)
+                });
+                
+                const result = await response.json();
+                
+                if (result.ok) {
+                    showNotification('✅ Message sent successfully! Check your email.', 'success');
+                    this.reset();
+                } else {
+                    showNotification(`❌ Error: ${result.error || 'Unknown error'}`, 'error');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('❌ Network error. Please check your connection.', 'error');
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                notification.textContent = '';
+                notification.className = 'notification';
+            }, 5000);
+        }
+
+        // Test backend connection
+        async function testBackendConnection() {
+            const backendUrl = localStorage.getItem('portfolioBackendUrl');
+            if (!backendUrl) {
+                showNotification('Please set your backend URL first', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(backendUrl, {
+                    method: 'OPTIONS'
+                });
+                
+                if (response.ok) {
+                    showNotification('✅ Backend connection successful!', 'success');
+                } else {
+                    showNotification('⚠️ Backend responded but with status: ' + response.status, 'info');
+                }
+            } catch (error) {
+                showNotification('❌ Cannot connect to backend. Check the URL.', 'error');
+            }
+        }
+
+        // Add test connection button
+        document.addEventListener('DOMContentLoaded', function() {
+            const configSection = document.querySelector('.config-section');
+            const testButton = document.createElement('button');
+            testButton.textContent = 'Test Connection';
+            testButton.style.marginLeft = '10px';
+            testButton.style.background = '#17a2b8';
+            testButton.onclick = testBackendConnection;
+            
+            const updateButton = configSection.querySelector('button');
+            updateButton.parentNode.insertBefore(testButton, updateButton.nextSibling);
+        });
+    </script>
+</body>
+</html>
