@@ -210,3 +210,25 @@
 // ===== RESPONSIVE NAVIGATION =====
 // All mobile navigation functionality is now handled by responsive-nav.js
 // This ensures clean separation between desktop and mobile modes
+// Force-load lazy images on mobile (if using data-src)
+(function () {
+    function loadAllImages() {
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        if (!img.getAttribute('src')) {
+          img.src = img.getAttribute('data-src');
+          img.removeAttribute('data-src');
+        }
+      });
+    }
+    if (window.innerWidth <= 768) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadAllImages);
+      } else {
+        loadAllImages();
+      }
+      ['scroll','touchstart'].forEach(ev =>
+        window.addEventListener(ev, loadAllImages, { once:true, passive:true })
+      );
+    }
+  })();
+  

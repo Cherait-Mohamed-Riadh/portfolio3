@@ -6413,4 +6413,38 @@ body {
     /* منع تمرير الصفحة عند الفتح */
     body.no-scroll{overflow:hidden;height:100dvh;touch-action:none}
   }
-                  
+                  /* ===== Mobile image fix (projects/expertise) ===== */
+@media (max-width: 768px) {
+    /* لو الصور داخل وسم <img> */
+    .project-card img,
+    .featured-card img,
+    .expertise-card img {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 100% !important;
+      height: auto !important;
+      object-fit: cover;
+    }
+  
+    /* لو الصور داخل غلاف مخصص (div) */
+    .project-card .project-image,
+    .featured-card .card-media,
+    .expertise-card .card-media,
+    .expertise .image-wrapper {
+      display: block !important;
+      min-height: 180px;              /* يمنع انهيار الارتفاع على الهاتف */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+  
+    /* احتياط: لا تخفي الكروت نفسها */
+    .project-card,
+    .featured-card,
+    .expertise-card {
+      overflow: visible;
+    }
+  }
+  
