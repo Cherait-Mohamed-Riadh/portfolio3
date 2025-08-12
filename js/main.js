@@ -192,43 +192,13 @@
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
                     
-                    // Close mobile menu if open
-                    const navMenu = utils.safeQuerySelector('#navMenu');
-                    const mobileToggle = utils.safeQuerySelector('#mobileMenuToggle');
-                    if (navMenu && navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
-                        mobileToggle.classList.remove('active');
-                    }
+                    // Close mobile menu if open - Now handled by responsive-nav.js
+                    // This ensures clean separation between desktop and mobile navigation
                 });
             });
 
-            // Mobile menu toggle
-            const mobileMenuToggle = utils.safeQuerySelector('#mobileMenuToggle');
-            if (mobileMenuToggle) {
-                utils.safeAddEventListener(mobileMenuToggle, 'click', () => this.toggleMobileMenu());
-            }
-
-            // Mobile menu close button (× symbol)
-            utils.safeAddEventListener(document, 'click', (e) => {
-                const navMenu = utils.safeQuerySelector('#navMenu');
-                if (navMenu && navMenu.classList.contains('active')) {
-                    // Check if click is on the close button (× symbol)
-                    const rect = navMenu.getBoundingClientRect();
-                    const closeButtonArea = {
-                        top: rect.top + 32, // 2rem from top
-                        right: rect.right - 32, // 2rem from right
-                        bottom: rect.top + 80, // 2rem + 3rem height
-                        left: rect.right - 80 // 2rem + 3rem width
-                    };
-                    
-                    if (e.clientX >= closeButtonArea.left && 
-                        e.clientX <= closeButtonArea.right && 
-                        e.clientY >= closeButtonArea.top && 
-                        e.clientY <= closeButtonArea.bottom) {
-                        this.toggleMobileMenu();
-                    }
-                }
-            });
+            // Mobile menu toggle - Now handled by responsive-nav.js
+            // This prevents conflicts between the two navigation systems
 
             // Scroll to top button
             const scrollToTopBtn = utils.safeQuerySelector('#scrollToTopBtn');
@@ -1529,23 +1499,12 @@
             }, 5000);
         }
 
-        // Mobile Menu
+        // Mobile Menu - Now handled by responsive-nav.js
+        // This method is kept for compatibility but does nothing
         toggleMobileMenu() {
-            const navMenu = utils.safeQuerySelector('#navMenu');
-            const mobileToggle = utils.safeQuerySelector('#mobileMenuToggle');
-            const body = document.body;
-            
-            if (navMenu && mobileToggle) {
-                navMenu.classList.toggle('active');
-                mobileToggle.classList.toggle('active');
-                
-                // Toggle body scroll lock
-                if (navMenu.classList.contains('active')) {
-                    body.classList.add('menu-open');
-                } else {
-                    body.classList.remove('menu-open');
-                }
-            }
+            // Mobile navigation is now handled by responsive-nav.js
+            // This prevents conflicts between the two systems
+            return;
         }
 
         // Scroll to Top
