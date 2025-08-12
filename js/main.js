@@ -236,11 +236,11 @@
                 utils.safeAddEventListener(scrollToTopBtn, 'click', () => this.scrollToTop());
             }
 
-            // Form submission
-            const contactForm = utils.safeQuerySelector('#contactForm');
-            if (contactForm) {
-                utils.safeAddEventListener(contactForm, 'submit', (e) => this.handleFormSubmit(e));
-            }
+            // Form submission - Handled by contact.js
+            // const contactForm = utils.safeQuerySelector('#contact-form');
+            // if (contactForm) {
+            //     utils.safeAddEventListener(contactForm, 'submit', (e) => this.handleFormSubmit(e));
+            // }
 
             // Keyboard navigation for faster access
             utils.safeAddEventListener(document, 'keydown', (e) => {
@@ -1472,29 +1472,12 @@
             setTimeout(() => input.focus(), 500);
         }
 
+        // Form submission is now handled by contact.js
+        // This method is kept for compatibility but does nothing
         handleFormSubmit(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission
-            setTimeout(() => {
-                // Reset form
-                form.reset();
-                
-                // Show success message
-                this.showNotification('Message sent successfully!', 'success');
-                
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+            // Form submission is handled by contact.js
+            // This prevents conflicts between the two handlers
+            return;
         }
 
         showNotification(message, type = 'info') {

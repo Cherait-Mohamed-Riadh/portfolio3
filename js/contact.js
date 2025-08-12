@@ -1,6 +1,6 @@
 // Contact Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS animations
+    // Initialize AOS animations - Only if AOS is available
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 1000,
@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
+        console.log('Contact form found and event listener added');
+    } else {
+        console.warn('Contact form not found');
     }
 
     // Form validation and submission
@@ -37,11 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Show loading state
-        if (statusEl) { 
-            statusEl.textContent = 'Sending...'; 
-            statusEl.style.color = '#777'; 
-        }
+        // Loading state is now handled in sendToGoogleAppsScript function
 
         // Send to Google Apps Script
         sendToGoogleAppsScript(formData);
@@ -50,17 +49,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Send form data to Google Apps Script
     async function sendToGoogleAppsScript(formData) {
         try {
+            // Show loading state
+            if (statusEl) { 
+                statusEl.textContent = 'Sending...'; 
+                statusEl.style.color = '#777'; 
+            }
+
+            console.log('Sending form data to Google Apps Script...');
+            console.log('Form data:', Object.fromEntries(formData));
+
             const res = await fetch('https://script.google.com/macros/s/AKfycby4ueJrPGea-1Q6v1m2XTArhauPbZVMtBPi46YMQKNmYLmnKy3b6GJ5LrJtE7yPHiBN4w/exec', {
                 method: 'POST',
                 body: formData
             });
 
+            console.log('Response status:', res.status);
+            console.log('Response ok:', res.ok);
+
             let data = {};
             try { 
                 data = await res.json(); 
-            } catch (_) {}
+                console.log('Response data:', data);
+            } catch (_) {
+                console.log('Response is not JSON');
+            }
 
             if (res.ok && data && data.ok) {
+                console.log('Form submitted successfully');
                 if (statusEl) { 
                     statusEl.textContent = 'Submitted Successfully ✅'; 
                     statusEl.style.color = '#078b4f'; 
@@ -70,12 +85,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (statusEl) statusEl.textContent = ''; 
                 }, 5000);
             } else {
+                console.log('Form submission failed');
                 if (statusEl) { 
                     statusEl.textContent = 'An Error Occurred ❌'; 
                     statusEl.style.color = '#c62828'; 
                 }
             }
         } catch (err) {
+            console.error('Form submission error:', err);
             if (statusEl) { 
                 statusEl.textContent = 'An Error Occurred ❌'; 
                 statusEl.style.color = '#c62828'; 
@@ -138,38 +155,47 @@ document.addEventListener('DOMContentLoaded', function() {
         if (errorElement) {
             errorElement.textContent = message;
             errorElement.classList.add('show');
+        } else {
+            console.warn(`Error element with id '${errorId}' not found`);
         }
     }
 
     // Clear all form errors
     function clearFormErrors() {
         const errorElements = document.querySelectorAll('.form-error');
-        errorElements.forEach(element => {
-            element.classList.remove('show');
-            element.textContent = '';
-        });
+        if (errorElements.length > 0) {
+            errorElements.forEach(element => {
+                element.classList.remove('show');
+                element.textContent = '';
+            });
+        }
     }
 
     // Show form message
     function showFormMessage(type, message) {
-        formMessage.textContent = message;
-        formMessage.className = `form-message ${type}`;
-        formMessage.style.display = 'block';
+        if (formMessage) {
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type}`;
+            formMessage.style.display = 'block';
 
-        // Auto-hide success messages after 5 seconds
-        if (type === 'success') {
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }
         }
     }
 
-    // Animate statistics numbers
+    // Animate statistics numbers - Only if elements exist
     function animateNumbers() {
         const statNumbers = document.querySelectorAll('.stat-number');
+        if (statNumbers.length === 0) return;
         
         statNumbers.forEach(stat => {
             const target = parseInt(stat.getAttribute('data-target'));
+            if (isNaN(target)) return;
+            
             const duration = 2000; // 2 seconds
             const increment = target / (duration / 16); // 60fps
             let current = 0;
@@ -185,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Trigger number animation when stats come into view
+    // Trigger number animation when stats come into view - Only if element exists
     const statsSection = document.querySelector('.hero-stats');
     if (statsSection) {
         const observer = new IntersectionObserver((entries) => {
@@ -200,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(statsSection);
     }
 
-    // Contact card hover effects
+    // Contact card hover effects - Only if element exists
     const contactCard = document.querySelector('.contact-card');
     if (contactCard) {
         contactCard.addEventListener('mouseenter', function() {
@@ -212,70 +238,78 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Service cards hover effects
+    // Service cards hover effects - Only if elements exist
     const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
+    if (serviceCards.length > 0) {
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
 
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
-    });
+    }
 
-    // Contact links functionality
+    // Contact links functionality - Only if elements exist
     const contactLinks = document.querySelectorAll('.contact-link');
-    contactLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Add click animation
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
+    if (contactLinks.length > 0) {
+        contactLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
         });
-    });
+    }
 
-    // Social media links
+    // Social media links - Only if elements exist
     const socialLinks = document.querySelectorAll('.social-link');
-    socialLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Add click animation
-            this.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
+    if (socialLinks.length > 0) {
+        socialLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add click animation
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
         });
-    });
+    }
 
-    // Form field focus effects
+    // Form field focus effects - Only if elements exist
     const formFields = document.querySelectorAll('.form-group input, .form-group textarea');
-    formFields.forEach(field => {
-        field.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-            // إعادة تطبيق النصوص عند focus
-            if (window.FormTextLock && window.FormTextLock.enforceFormTexts) {
-                setTimeout(window.FormTextLock.enforceFormTexts, 0);
+    if (formFields.length > 0) {
+        formFields.forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+                // إعادة تطبيق النصوص عند focus
+                if (window.FormTextLock && window.FormTextLock.enforceFormTexts) {
+                    setTimeout(window.FormTextLock.enforceFormTexts, 0);
+                }
+            });
+
+            field.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+
+            // Auto-focus effect for filled fields
+            if (field.value) {
+                field.parentElement.classList.add('focused');
             }
         });
+    }
 
-        field.addEventListener('blur', function() {
-            if (!this.value) {
-                this.parentElement.classList.remove('focused');
-            }
-        });
-
-        // Auto-focus effect for filled fields
-        if (field.value) {
-            field.parentElement.classList.add('focused');
-        }
-    });
-
-    // Initialize floating particles effect
+    // Initialize floating particles effect - Only if element exists
     initParticlesEffect();
 });
 
-// Floating particles effect
+// Floating particles effect - Only if element exists
 function initParticlesEffect() {
     const particlesContainer = document.getElementById('heroParticles');
     if (!particlesContainer) return;
@@ -299,18 +333,21 @@ function initParticlesEffect() {
     }
 }
 
-// Add CSS for floating particles animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes float-particle {
-        0%, 100% {
-            transform: translateY(0px) translateX(0px);
-            opacity: 0.3;
+// Add CSS for floating particles animation - Only if not already added
+if (!document.querySelector('style[data-particles]')) {
+    const style = document.createElement('style');
+    style.setAttribute('data-particles', 'true');
+    style.textContent = `
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+                opacity: 0.8;
+            }
         }
-        50% {
-            transform: translateY(-20px) translateX(10px);
-            opacity: 0.8;
-        }
-    }
-`;
-document.head.appendChild(style);
+    `;
+    document.head.appendChild(style);
+}
