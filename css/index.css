@@ -59,6 +59,35 @@
         max-width: 100%;
         margin: 0;
     }
+    
+    /* Mobile-specific color for Mohamed Riadh text */
+    .title-highlight {
+        color: var(--primary-blue) !important;
+        -webkit-text-fill-color: var(--primary-blue) !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+    }
+    
+    .brand-text {
+        color: var(--primary-blue) !important;
+    }
+}
+
+/* Additional mobile styling for very small screens */
+@media (max-width: 480px) {
+    /* Mobile-specific color for Mohamed Riadh text on very small screens */
+    .title-highlight {
+        color: var(--primary-blue) !important;
+        -webkit-text-fill-color: var(--primary-blue) !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+    }
+    
+    .brand-text {
+        color: var(--primary-blue) !important;
+    }
 }
 
 .hero-background {
@@ -1500,7 +1529,7 @@
     }
     
     .title-highlight {
-        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        background: var(--bright-blue);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -1508,7 +1537,7 @@
         margin: var(--space-sm) 0;
         font-weight: 900;
         letter-spacing: -0.03em;
-        text-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        text-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
     }
     
     .hero-description {
@@ -2197,12 +2226,8 @@
     
     .skill-level span {
         font-size: 0.875rem;
-        color: var(--primary-blue);
-        font-weight: 600;
-        background: rgba(37, 99, 235, 0.1);
-        padding: var(--space-xs) var(--space-sm);
-        border-radius: var(--radius-md);
-        border: 1px solid rgba(37, 99, 235, 0.2);
+        color: var(--text-secondary);
+        font-weight: 500;
     }
     
     .skill-bar {

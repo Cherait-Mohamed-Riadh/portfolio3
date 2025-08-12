@@ -202,44 +202,14 @@ function loadMoreArticles() {
 function addMoreArticles() {
     const articlesGrid = document.getElementById('articlesGrid');
     
-    // Sample additional articles
-    const additionalArticles = [
-        {
-            category: 'cybersecurity',
-            title: 'Advanced Threat Detection',
-            excerpt: 'Implementing next-generation threat detection systems for enterprise security.',
-            image: 'image/cybersecurity.png',
-            date: 'Dec 20, 2024',
-            readTime: '8 min read'
-        },
-        {
-            category: 'web-development',
-            title: 'Modern CSS Techniques',
-            excerpt: 'Exploring advanced CSS features for creating stunning user interfaces.',
-            image: 'image/Programming.png',
-            date: 'Dec 18, 2024',
-            readTime: '6 min read'
-        },
-        {
-            category: 'security',
-            title: 'API Security Best Practices',
-            excerpt: 'Essential security measures for protecting REST and GraphQL APIs.',
-            image: 'image/cybersecurity.png',
-            date: 'Dec 15, 2024',
-            readTime: '10 min read'
-        }
-    ];
+    // No additional articles to add
+    // Articles will only be added when specifically requested
     
-    additionalArticles.forEach(article => {
-        const articleElement = createArticleElement(article);
-        articlesGrid.appendChild(articleElement);
-        
-        // Animate in
-        setTimeout(() => {
-            articleElement.style.opacity = '1';
-            articleElement.style.transform = 'translateY(0)';
-        }, 100);
-    });
+    // Hide the load more button since there are no more articles
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.style.display = 'none';
+    }
 }
 
 function createArticleElement(article) {

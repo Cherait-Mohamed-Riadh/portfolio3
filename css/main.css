@@ -11,6 +11,7 @@
     --primary-dark: #1d4ed8;
     --secondary-blue: #3b82f6;
     --accent-blue: #60a5fa;
+    --bright-blue: #00bfff; /* Bright blue color for mobile title highlight */
     --success-green: #10b981;
     --warning-orange: #f59e0b;
     --error-red: #ef4444;
@@ -5497,7 +5498,10 @@ body {
       height: 64px;
     }
   
-    .brand-text { font-size: 1.05rem; }
+    .brand-text { 
+        font-size: 1.05rem; 
+        color: var(--primary-blue) !important;
+    }
     .brand-subtitle { font-size: 0.7rem; }
   
     /* إظهار قائمة الهاتف كلوحة كاملة عند الفتح (لو عندك تفعيل JS) */
@@ -5913,7 +5917,10 @@ body {
   
   /* شاشات أصغر */
   @media (max-width: 480px) {
-    .brand-text { font-size: 1.1rem; }
+    .brand-text { 
+        font-size: 1.1rem; 
+        color: var(--primary-blue) !important;
+    }
     .brand-subtitle { font-size: 0.7rem; }
     .nav-link { padding: 8px 12px; }
   }
@@ -6446,5 +6453,12 @@ body {
     .expertise-card {
       overflow: visible;
     }
+  }
+  
+  /* Hide scroll indicator on mobile devices */
+  @media (max-width: 768px) {
+      .scroll-indicator {
+          display: none !important;
+      }
   }
   

@@ -1198,14 +1198,11 @@
             });
         }
 
-        // Chatbot functionality
+        // Chatbot functionality - Now handled by enhanced-chatbot.js
         setupChatbot() {
-            const chatbotIcon = utils.safeQuerySelector('#chatbotIcon');
-            if (chatbotIcon) {
-                utils.safeAddEventListener(chatbotIcon, 'click', () => {
-                    this.openChatbot();
-                });
-            }
+            // Enhanced chatbot is now handled by enhanced-chatbot.js
+            // This method is kept for compatibility but does nothing
+            return;
         }
 
         // Navigation help tooltip
@@ -1238,208 +1235,11 @@
             }
         }
 
+        // Open Chatbot - Now handled by enhanced-chatbot.js
         openChatbot() {
-            // Create chatbot modal
-            const chatbotModal = document.createElement('div');
-            chatbotModal.className = 'chatbot-modal';
-            chatbotModal.innerHTML = `
-                <div class="chatbot-container">
-                    <div class="chatbot-header">
-                        <h3>AI Assistant</h3>
-                        <button class="chatbot-close" id="chatbotClose">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="chatbot-messages" id="chatbotMessages">
-                        <div class="message bot-message">
-                            <div class="message-content">
-                                Hello! I'm your AI assistant. How can I help you today?
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chatbot-input">
-                        <input type="text" id="chatbotInput" placeholder="Type your message...">
-                        <button id="chatbotSend">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(chatbotModal);
-            
-            // Add chatbot styles
-            if (!document.querySelector('#chatbot-styles')) {
-                const style = document.createElement('style');
-                style.id = 'chatbot-styles';
-                style.textContent = `
-                    .chatbot-modal {
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: rgba(0, 0, 0, 0.5);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        z-index: 9999;
-                        opacity: 0;
-                        transition: opacity var(--transition-normal);
-                    }
-                    .chatbot-modal.show {
-                        opacity: 1;
-                    }
-                    .chatbot-container {
-                        background: var(--bg-primary);
-                        border-radius: var(--radius-xl);
-                        width: 90%;
-                        max-width: 400px;
-                        max-height: 500px;
-                        display: flex;
-                        flex-direction: column;
-                        box-shadow: var(--shadow-xl);
-                        transform: scale(0.8);
-                        transition: transform var(--transition-normal);
-                    }
-                    .chatbot-modal.show .chatbot-container {
-                        transform: scale(1);
-                    }
-                    .chatbot-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: var(--space-lg);
-                        border-bottom: 1px solid var(--border-color);
-                    }
-                    .chatbot-header h3 {
-                        color: var(--text-primary);
-                        margin: 0;
-                    }
-                    .chatbot-close {
-                        background: none;
-                        border: none;
-                        color: var(--text-secondary);
-                        cursor: pointer;
-                        font-size: 1.25rem;
-                        padding: var(--space-xs);
-                    }
-                    .chatbot-close:hover {
-                        color: var(--text-primary);
-                    }
-                    .chatbot-messages {
-                        flex: 1;
-                        padding: var(--space-lg);
-                        overflow-y: auto;
-                        max-height: 300px;
-                    }
-                    .message {
-                        margin-bottom: var(--space-md);
-                        display: flex;
-                    }
-                    .bot-message {
-                        justify-content: flex-start;
-                    }
-                    .user-message {
-                        justify-content: flex-end;
-                    }
-                    .message-content {
-                        background: var(--bg-secondary);
-                        color: var(--text-primary);
-                        padding: var(--space-sm) var(--space-md);
-                        border-radius: var(--radius-lg);
-                        max-width: 80%;
-                        word-wrap: break-word;
-                    }
-                    .user-message .message-content {
-                        background: var(--primary-blue);
-                        color: var(--white);
-                    }
-                    .chatbot-input {
-                        display: flex;
-                        gap: var(--space-sm);
-                        padding: var(--space-lg);
-                        border-top: 1px solid var(--border-color);
-                    }
-                    .chatbot-input input {
-                        flex: 1;
-                        padding: var(--space-sm) var(--space-md);
-                        border: 1px solid var(--border-color);
-                        border-radius: var(--radius-md);
-                        background: var(--bg-primary);
-                        color: var(--text-primary);
-                    }
-                    .chatbot-input button {
-                        background: var(--primary-blue);
-                        color: var(--white);
-                        border: none;
-                        border-radius: var(--radius-md);
-                        padding: var(--space-sm) var(--space-md);
-                        cursor: pointer;
-                        transition: all var(--transition-normal);
-                    }
-                    .chatbot-input button:hover {
-                        background: var(--primary-dark);
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            // Show modal
-            setTimeout(() => chatbotModal.classList.add('show'), 10);
-            
-            // Close functionality
-            const closeBtn = chatbotModal.querySelector('#chatbotClose');
-            utils.safeAddEventListener(closeBtn, 'click', () => {
-                chatbotModal.classList.remove('show');
-                setTimeout(() => chatbotModal.remove(), 300);
-            });
-            
-            // Click outside to close
-            utils.safeAddEventListener(chatbotModal, 'click', (e) => {
-                if (e.target === chatbotModal) {
-                    chatbotModal.classList.remove('show');
-                    setTimeout(() => chatbotModal.remove(), 300);
-                }
-            });
-            
-            // Send message functionality
-            const input = chatbotModal.querySelector('#chatbotInput');
-            const sendBtn = chatbotModal.querySelector('#chatbotSend');
-            const messagesContainer = chatbotModal.querySelector('#chatbotMessages');
-            
-            const sendMessage = () => {
-                const message = input.value.trim();
-                if (message) {
-                    // Add user message
-                    const userMessage = document.createElement('div');
-                    userMessage.className = 'message user-message';
-                    userMessage.innerHTML = `<div class="message-content">${message}</div>`;
-                    messagesContainer.appendChild(userMessage);
-                    
-                    input.value = '';
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    
-                    // Simulate bot response
-                    setTimeout(() => {
-                        const botMessage = document.createElement('div');
-                        botMessage.className = 'message bot-message';
-                        botMessage.innerHTML = `<div class="message-content">Thanks for your message! I'm here to help with any questions about cybersecurity, financial markets, or web development.</div>`;
-                        messagesContainer.appendChild(botMessage);
-                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    }, 1000);
-                }
-            };
-            
-            utils.safeAddEventListener(sendBtn, 'click', sendMessage);
-            utils.safeAddEventListener(input, 'keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            // Focus input
-            setTimeout(() => input.focus(), 500);
+            // Enhanced chatbot is now handled by enhanced-chatbot.js
+            // This method is kept for compatibility but does nothing
+            return;
         }
 
         // Form submission is now handled by contact.js
