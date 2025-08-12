@@ -508,3 +508,662 @@
     }
 
 })();
+/* =========================================
+   MOBILE NAVBAR TOGGLE — add at end of index.js
+========================================= */
+(function () {
+    const toggleBtn = document.getElementById('mobileMenuToggle');
+    const navMenu   = document.getElementById('navMenu');
+    const body      = document.body;
+  
+    if (!toggleBtn || !navMenu) return;
+  
+    // إمكانية الوصول
+    toggleBtn.setAttribute('aria-label', 'Toggle navigation menu');
+    toggleBtn.setAttribute('aria-controls', 'navMenu');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('role', 'navigation');
+  
+    const openMenu = () => {
+      toggleBtn.classList.add('active');
+      navMenu.classList.add('open');
+      body.classList.add('no-scroll');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    };
+  
+    const closeMenu = () => {
+      toggleBtn.classList.remove('active');
+      navMenu.classList.remove('open');
+      body.classList.remove('no-scroll');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+  
+    const toggleMenu = () => {
+      if (navMenu.classList.contains('open')) closeMenu();
+      else openMenu();
+    };
+  
+    // ضغط على زر المنيو
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+  
+    // إغلاق عند الضغط على أي رابط داخل القائمة
+    navMenu.addEventListener('click', (e) => {
+      const link = e.target.closest('.nav-link, .language-option');
+      if (link) closeMenu();
+    });
+  
+    // إغلاق عند الضغط خارج القائمة
+    document.addEventListener('click', (e) => {
+      const insideMenu  = e.target.closest('#navMenu');
+      const isToggleBtn = e.target.closest('#mobileMenuToggle');
+      if (!insideMenu && !isToggleBtn && navMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  
+    // إغلاق بزر Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  
+    // إغلاق تلقائي لو كبر العرض من 768px وطالع
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && navMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  })();
+/* =========================================
+   NAVBAR MOBILE — Overlay & Toggle polish
+   أضِفه في آخر index.js
+========================================= */
+(function () {
+    const toggleBtn = document.getElementById('mobileMenuToggle');
+    const navMenu   = document.getElementById('navMenu');
+    const body      = document.body;
+  
+    if (!toggleBtn || !navMenu) return;
+  
+    // أنشئ Overlay مرة واحدة
+    let overlay = document.getElementById('navOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'navOverlay';
+      document.body.appendChild(overlay);
+    }
+  
+    const openMenu = () => {
+      toggleBtn.classList.add('active');
+      navMenu.classList.add('open');
+      overlay.classList.add('open');
+      body.classList.add('no-scroll');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    };
+  
+    const closeMenu = () => {
+      toggleBtn.classList.remove('active');
+      navMenu.classList.remove('open');
+      overlay.classList.remove('open');
+      body.classList.remove('no-scroll');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+  
+    const toggleMenu = () => navMenu.classList.contains('open') ? closeMenu() : openMenu();
+  
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+  
+    // إغلاق عند الضغط على الـOverlay أو رابط داخل القائمة
+    overlay.addEventListener('click', closeMenu);
+    navMenu.addEventListener('click', (e) => {
+      const link = e.target.closest('.nav-link, .language-option');
+      if (link) closeMenu();
+    });
+  
+    // إغلاق بـ ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('open')) closeMenu();
+    });
+  
+    // عند تكبير الشاشة، أغلق القائمة
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && navMenu.classList.contains('open')) closeMenu();
+    });
+  
+    // معالجة نادرة: لو عنصر ما حاول يسبب عرض > 100vw
+    window.addEventListener('load', () => {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+    });
+  })();
+/* =========================================
+   Mobile navbar inline mode (same desktop style)
+   ضع هذا في آخر index.js
+========================================= */
+(function () {
+    const navMenu = document.getElementById('navMenu');
+    const toggle  = document.getElementById('mobileMenuToggle');
+    let overlay   = document.getElementById('navOverlay');
+  
+    if (!navMenu) return;
+  
+    const applyInlineNavbar = () => {
+      if (window.innerWidth <= 768) {
+        // إلغاء وضع الدرج
+        navMenu.classList.add('inline-nav');
+        navMenu.classList.remove('open');
+  
+        // أخفِ زر المنيو والـOverlay
+        if (toggle) {
+          toggle.classList.remove('active');
+          toggle.style.display = 'none';
+        }
+        if (overlay) {
+          overlay.classList.remove('open');
+          overlay.style.display = 'none';
+        }
+        document.body.classList.remove('no-scroll');
+      } else {
+        // عودة السلوك العادي على الديسكتوب
+        navMenu.classList.remove('inline-nav');
+        if (toggle) toggle.style.display = '';
+        if (overlay) overlay.style.display = '';
+      }
+    };
+  
+    window.addEventListener('load', applyInlineNavbar);
+    window.addEventListener('resize', applyInlineNavbar);
+  })();
+/* ================================
+   MOBILE MENU BUTTON + SLIDE DRAWER
+================================== */
+(function(){
+    const body = document.body;
+    
+    // إنشاء زر المنيو
+    const menuBtn = document.createElement('div');
+    menuBtn.className = 'mobile-menu-btn';
+    menuBtn.innerHTML = '<span></span>';
+    
+    // تحديد مكان وضع الزر (داخل الشريط العلوي)
+    const navbar = document.querySelector('.navbar, .nav-container');
+    if (navbar) navbar.appendChild(menuBtn);
+  
+    // إنشاء الـ Drawer
+    const drawer = document.createElement('div');
+    drawer.className = 'mobile-drawer';
+    drawer.innerHTML = `
+      <a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a>
+      <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
+      <a href="#expertise" class="nav-link"><i class="fas fa-cogs"></i> Expertise</a>
+      <a href="#projects" class="nav-link"><i class="fas fa-briefcase"></i> Projects</a>
+      <a href="#blog" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
+      <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+    `;
+    document.body.appendChild(drawer);
+  
+    // Overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'drawer-overlay';
+    document.body.appendChild(overlay);
+  
+    // وظائف الفتح والإغلاق
+    const openDrawer = () => {
+      drawer.classList.add('open');
+      overlay.classList.add('active');
+      menuBtn.classList.add('active');
+      body.style.overflow = 'hidden';
+    };
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      overlay.classList.remove('active');
+      menuBtn.classList.remove('active');
+      body.style.overflow = '';
+    };
+  
+    // أحداث
+    menuBtn.addEventListener('click', () => {
+      if (drawer.classList.contains('open')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+    overlay.addEventListener('click', closeDrawer);
+    drawer.addEventListener('click', e => {
+      if (e.target.classList.contains('nav-link')) {
+        closeDrawer();
+      }
+    });
+  })();
+/* =========================================
+   Mobile menu toggle for #mobileMenuToggle
+   ضعّه في آخر index.js
+========================================= */
+(function(){
+    const btn = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('navMenu');
+    if (!btn || !menu) return;
+  
+    // اصنع overlay مرة واحدة
+    let overlay = document.getElementById('navOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'navOverlay';
+      document.body.appendChild(overlay);
+    }
+  
+    const openMenu = () => {
+      btn.classList.add('active');
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+      btn.setAttribute('aria-expanded','true');
+    };
+    const closeMenu = () => {
+      btn.classList.remove('active');
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      btn.setAttribute('aria-expanded','false');
+    };
+  
+    btn.setAttribute('aria-label','Open menu');
+    btn.setAttribute('aria-controls','navMenu');
+    btn.setAttribute('aria-expanded','false');
+  
+    btn.addEventListener('click', (e)=> {
+      e.stopPropagation();
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+  
+    overlay.addEventListener('click', closeMenu);
+  
+    // إغلاق عند الضغط على أي رابط داخل القائمة
+    menu.addEventListener('click', (e)=>{
+      const link = e.target.closest('.nav-link');
+      if (link) closeMenu();
+    });
+  
+    // إغلاق بـ ESC
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+    });
+  
+    // إغلاق تلقائي لو تعدّى العرض 768px
+    window.addEventListener('resize', ()=>{
+      if (window.innerWidth > 768 && menu.classList.contains('open')) closeMenu();
+    });
+  })();
+  (function(){
+    const btn = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('navMenu');
+    if (!btn || !menu) return;
+  
+    let overlay = document.getElementById('navOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'navOverlay';
+      document.body.appendChild(overlay);
+    }
+  
+    const openMenu = () => {
+      btn.classList.add('active');
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+    };
+    const closeMenu = () => {
+      btn.classList.remove('active');
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    };
+  
+    btn.addEventListener('click', () => {
+      if (menu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    overlay.addEventListener('click', closeMenu);
+    menu.addEventListener('click', e => {
+      if (e.target.classList.contains('nav-link')) closeMenu();
+    });
+  })();
+/* Force center-modal behavior on mobile */
+(function () {
+    const btn  = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('navMenu');
+    if (!btn || !menu) return;
+  
+    // اصنع overlay إن لم يوجد
+    let overlay = document.getElementById('navOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'navOverlay';
+      document.body.appendChild(overlay);
+    }
+  
+    const openMenu = () => {
+      btn.classList.add('active');
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+    };
+    const closeMenu = () => {
+      btn.classList.remove('active');
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    };
+  
+    // تأكد من إزالة أي كلاس سابق قد يغيّر السلوك
+    const ensureModalMode = () => {
+      if (window.innerWidth <= 768) {
+        menu.classList.remove('inline-nav'); // إن وُجد من قبل
+      }
+    };
+    window.addEventListener('load', ensureModalMode);
+    window.addEventListener('resize', ensureModalMode);
+  
+    btn.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+    overlay.addEventListener('click', closeMenu);
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('.nav-link')) closeMenu();
+    });
+  
+    // إغلاق بـ ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+    });
+  })();
+/* ========= VIDEO MODAL (YouTube/Vimeo/MP4) ========= */
+(function () {
+    const BODY = document.body;
+  
+    // اصنع المودال مرّة واحدة لو غير موجود
+    let videoModal = document.getElementById('videoModal');
+    if (!videoModal) {
+      videoModal = document.createElement('div');
+      videoModal.id = 'videoModal';
+      videoModal.className = 'video-modal';
+      videoModal.innerHTML = `
+        <div class="video-overlay" id="videoOverlay"></div>
+        <div class="video-content">
+          <button class="video-close" id="videoClose" aria-label="Close video">
+            <i class="fas fa-times"></i>
+          </button>
+          <!-- سيتم إدراج iframe أو video هنا -->
+        </div>
+      `;
+      document.body.appendChild(videoModal);
+    }
+  
+    const overlay = videoModal.querySelector('#videoOverlay');
+    const closeBtn = videoModal.querySelector('#videoClose');
+    const content  = videoModal.querySelector('.video-content');
+  
+    function toYouTubeEmbed(url) {
+      // يدعم روابط watch?v= و youtu.be
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtube.com')) {
+          const id = u.searchParams.get('v');
+          if (id) return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+        }
+        if (u.hostname.includes('youtu.be')) {
+          const id = u.pathname.replace('/', '');
+          if (id) return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+        }
+        return null;
+      } catch { return null; }
+    }
+  
+    function toVimeoEmbed(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes('vimeo.com')) {
+          const id = u.pathname.split('/').filter(Boolean).pop();
+          if (id) return `https://player.vimeo.com/video/${id}?autoplay=1`;
+        }
+        return null;
+      } catch { return null; }
+    }
+  
+    function openVideo(src) {
+      // نظّف أي محتوى سابق
+      const old = content.querySelector('iframe, video');
+      if (old) old.remove();
+  
+      let node;
+      const isMp4 = /\.mp4$|\.webm$|\.ogg$/i.test(src);
+      const yt = toYouTubeEmbed(src);
+      const vm = toVimeoEmbed(src);
+  
+      if (isMp4) {
+        node = document.createElement('video');
+        node.src = src;
+        node.controls = true;
+        node.autoplay = true;
+        node.playsInline = true;
+      } else if (yt || vm) {
+        node = document.createElement('iframe');
+        node.allow =
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        node.allowFullscreen = true;
+        node.src = yt || vm;
+      } else {
+        // fallback: افتح كرابط عادي
+        window.open(src, '_blank');
+        return;
+      }
+  
+      content.appendChild(node);
+      videoModal.classList.add('active');
+      BODY.style.overflow = 'hidden';
+    }
+  
+    function closeVideo() {
+      videoModal.classList.remove('active');
+      BODY.style.overflow = '';
+      // أوقف التشغيل بإزالة العنصر
+      const el = content.querySelector('iframe, video');
+      if (el) el.remove();
+    }
+  
+    // اربط كل الأزرار التي تشغّل الفيديو
+    function bindVideoTriggers() {
+      document.querySelectorAll('.video-trigger[data-video]').forEach(btn => {
+        if (btn.__videoBound) return;
+        btn.__videoBound = true;
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const src = btn.getAttribute('data-video');
+          if (src) openVideo(src);
+        });
+      });
+    }
+  
+    // إغلاق بالأوفرلاي وبالزر و بـ ESC
+    overlay.addEventListener('click', closeVideo);
+    closeBtn.addEventListener('click', closeVideo);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && videoModal.classList.contains('active')) closeVideo();
+    });
+  
+    // اربط عند التحميل وبعد تغيير DOM المحتمل
+    window.addEventListener('load', bindVideoTriggers);
+    const mo = new MutationObserver(bindVideoTriggers);
+    mo.observe(document.body, { childList: true, subtree: true });
+  })();
+/* ===== Universal VIDEO MODAL (delegated) ===== */
+(function () {
+    const BODY = document.body;
+  
+    // أنشئ المودال مرة واحدة
+    function ensureVideoModal() {
+      let modal = document.getElementById('videoModal');
+      if (modal) return modal;
+  
+      modal = document.createElement('div');
+      modal.id = 'videoModal';
+      modal.innerHTML = `
+        <div class="video-overlay"></div>
+        <div class="video-content">
+          <button class="video-close" aria-label="Close video"><i class="fas fa-times"></i></button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      return modal;
+    }
+  
+    function toYouTubeEmbed(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtube.com')) {
+          const id = u.searchParams.get('v');
+          if (id) return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+        }
+        if (u.hostname.includes('youtu.be')) {
+          const id = u.pathname.replace('/', '');
+          if (id) return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+        }
+      } catch {}
+      return null;
+    }
+  
+    function toVimeoEmbed(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes('vimeo.com')) {
+          const id = u.pathname.split('/').filter(Boolean).pop();
+          if (id) return `https://player.vimeo.com/video/${id}?autoplay=1`;
+        }
+      } catch {}
+      return null;
+    }
+  
+    function openVideo(src) {
+      const modal = ensureVideoModal();
+      const content = modal.querySelector('.video-content');
+  
+      // نظّف السابق
+      const old = content.querySelector('iframe, video');
+      if (old) old.remove();
+  
+      let node;
+      const isFile = /\.(mp4|webm|ogg)$/i.test(src);
+      const yt = toYouTubeEmbed(src);
+      const vm = toVimeoEmbed(src);
+  
+      if (isFile) {
+        node = document.createElement('video');
+        node.src = src;
+        node.controls = true;
+        node.autoplay = true;
+        node.playsInline = true;
+      } else if (yt || vm) {
+        node = document.createElement('iframe');
+        node.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        node.allowFullscreen = true;
+        node.src = yt || vm;
+      } else {
+        console.warn('Unrecognized video URL:', src);
+        return;
+      }
+  
+      content.appendChild(node);
+      modal.classList.add('active');
+      BODY.style.overflow = 'hidden';
+  
+      // أزرار الإغلاق
+      const close = () => {
+        modal.classList.remove('active');
+        BODY.style.overflow = '';
+        const el = content.querySelector('iframe, video');
+        if (el) el.remove();
+      };
+      modal.querySelector('.video-overlay').onclick = close;
+      modal.querySelector('.video-close').onclick = close;
+      document.onkeydown = (e) => { if (e.key === 'Escape') close(); };
+    }
+  
+    // تفويض: أي عنصر عليه .video-trigger و data-video
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.video-trigger[data-video]');
+      if (!btn) return;
+      e.preventDefault();
+      const src = btn.getAttribute('data-video');
+      if (src) openVideo(src);
+    });
+  
+    // ضمان أعلى z-index لو كان عندك overlays أخرى
+    window.addEventListener('load', () => {
+      const modal = ensureVideoModal();
+      modal.style.zIndex = '99999';
+    });
+  })();
+/* ===== Mobile center menu modal toggle ===== */
+(function(){
+    const btn  = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('navMenu');
+    if (!btn || !menu) return;
+  
+    // اصنع الـOverlay لو غير موجود
+    let overlay = document.getElementById('navOverlay');
+    if (!overlay){
+      overlay = document.createElement('div');
+      overlay.id = 'navOverlay';
+      document.body.appendChild(overlay);
+    }
+  
+    const openMenu = () => {
+      btn.classList.add('active');
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+      btn.setAttribute('aria-expanded','true');
+    };
+    const closeMenu = () => {
+      btn.classList.remove('active');
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      btn.setAttribute('aria-expanded','false');
+    };
+  
+    btn.setAttribute('aria-controls','navMenu');
+    btn.setAttribute('aria-label','Open menu');
+    btn.setAttribute('aria-expanded','false');
+  
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+  
+    // إغلاق عند اختيار عنصر أو الضغط على ESC
+    menu.addEventListener('click', (e)=>{
+      if (e.target.closest('.nav-link')) closeMenu();
+    });
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+    });
+  
+    // ضمان إلغاء أي سلوك قديم (drawer/inline) عند الموبايل
+    const enforceModal = () => {
+      if (window.innerWidth <= 768) menu.classList.remove('inline-nav');
+    };
+    window.addEventListener('load', enforceModal);
+    window.addEventListener('resize', enforceModal);
+  })();
+                    

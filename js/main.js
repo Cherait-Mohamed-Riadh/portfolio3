@@ -164,8 +164,17 @@
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 utils.safeAddEventListener(link, 'click', (e) => {
+                    const href = link.getAttribute('href');
+                    
+                    // Check if this is an external link (not starting with #)
+                    if (href && !href.startsWith('#')) {
+                        // Allow external navigation (like blog.html)
+                        return; // Don't prevent default, let the link work normally
+                    }
+                    
+                    // Handle internal navigation (sections starting with #)
                     e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
+                    const targetId = href.substring(1);
                     const targetElement = utils.safeQuerySelector(`#${targetId}`);
                     
                     if (targetElement) {
@@ -199,6 +208,28 @@
                 utils.safeAddEventListener(mobileMenuToggle, 'click', () => this.toggleMobileMenu());
             }
 
+            // Mobile menu close button (× symbol)
+            utils.safeAddEventListener(document, 'click', (e) => {
+                const navMenu = utils.safeQuerySelector('#navMenu');
+                if (navMenu && navMenu.classList.contains('active')) {
+                    // Check if click is on the close button (× symbol)
+                    const rect = navMenu.getBoundingClientRect();
+                    const closeButtonArea = {
+                        top: rect.top + 32, // 2rem from top
+                        right: rect.right - 32, // 2rem from right
+                        bottom: rect.top + 80, // 2rem + 3rem height
+                        left: rect.right - 80 // 2rem + 3rem width
+                    };
+                    
+                    if (e.clientX >= closeButtonArea.left && 
+                        e.clientX <= closeButtonArea.right && 
+                        e.clientY >= closeButtonArea.top && 
+                        e.clientY <= closeButtonArea.bottom) {
+                        this.toggleMobileMenu();
+                    }
+                }
+            });
+
             // Scroll to top button
             const scrollToTopBtn = utils.safeQuerySelector('#scrollToTopBtn');
             if (scrollToTopBtn) {
@@ -217,7 +248,7 @@
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
                 
                 const navLinks = document.querySelectorAll('.nav-link');
-                const sections = ['home', 'about', 'expertise', 'projects', 'contact'];
+                const sections = ['home', 'about', 'expertise', 'projects', 'blog', 'contact'];
                 
                 switch(e.key) {
                     case '1':
@@ -225,16 +256,22 @@
                     case '3':
                     case '4':
                     case '5':
+                    case '6':
                         const index = parseInt(e.key) - 1;
                         if (sections[index]) {
                             e.preventDefault();
-                            const targetElement = utils.safeQuerySelector(`#${sections[index]}`);
-                            if (targetElement) {
-                                utils.smoothScrollTo(targetElement, 400);
-                                // Update active nav link
-                                navLinks.forEach(l => l.classList.remove('active'));
-                                const activeLink = document.querySelector(`[href="#${sections[index]}"]`);
-                                if (activeLink) activeLink.classList.add('active');
+                            if (sections[index] === 'blog') {
+                                // Navigate to blog page
+                                window.location.href = 'blog.html';
+                            } else {
+                                const targetElement = utils.safeQuerySelector(`#${sections[index]}`);
+                                if (targetElement) {
+                                    utils.smoothScrollTo(targetElement, 400);
+                                    // Update active nav link
+                                    navLinks.forEach(l => l.classList.remove('active'));
+                                    const activeLink = document.querySelector(`[href="#${sections[index]}"]`);
+                                    if (activeLink) activeLink.classList.add('active');
+                                }
                             }
                         }
                         break;
@@ -343,6 +380,7 @@
                 'nav.about': 'About',
                 'nav.expertise': 'Expertise',
                 'nav.projects': 'Projects',
+                'nav.blog': 'Blog',
                 'nav.contact': 'Contact',
                 'nav.language.english': 'English',
                 'nav.language.arabic': 'العربية',
@@ -469,7 +507,7 @@
                     
                     // Navigation Help
                     'nav.help.title': 'Quick Navigation',
-                    'nav.help.sections': 'Press 1-5 to jump to sections',
+                    'nav.help.sections': 'Press 1-6 to jump to sections',
                     'nav.help.navigation': 'Press Home / End for top/bottom',
                     
                     // Loading
@@ -483,6 +521,7 @@
                 'nav.about': 'حول',
                 'nav.expertise': 'الخبرات',
                 'nav.projects': 'المشاريع',
+                'nav.blog': 'المدونة',
                 'nav.contact': 'اتصل',
                 'nav.language.english': 'English',
                 'nav.language.arabic': 'العربية',
@@ -609,7 +648,7 @@
                     
                     // Navigation Help
                     'nav.help.title': 'التنقل السريع',
-                    'nav.help.sections': 'اضغط 1-5 للانتقال إلى الأقسام',
+                    'nav.help.sections': 'اضغط 1-6 للانتقال إلى الأقسام',
                     'nav.help.navigation': 'اضغط Home / End للانتقال للأعلى/الأسفل',
                     
                     // Loading
@@ -623,6 +662,7 @@
                 'nav.about': 'À propos',
                 'nav.expertise': 'Expertise',
                 'nav.projects': 'Projets',
+                'nav.blog': 'Blog',
                 'nav.contact': 'Contact',
                 'nav.language.english': 'English',
                 'nav.language.arabic': 'العربية',
@@ -749,7 +789,7 @@
                     
                     // Navigation Help
                     'nav.help.title': 'Navigation Rapide',
-                    'nav.help.sections': 'Appuyez sur 1-5 pour sauter aux sections',
+                    'nav.help.sections': 'Appuyez sur 1-6 pour sauter aux sections',
                     'nav.help.navigation': 'Appuyez sur Home / End pour haut/bas'
                 }
             };
@@ -1510,10 +1550,18 @@
         toggleMobileMenu() {
             const navMenu = utils.safeQuerySelector('#navMenu');
             const mobileToggle = utils.safeQuerySelector('#mobileMenuToggle');
+            const body = document.body;
             
             if (navMenu && mobileToggle) {
                 navMenu.classList.toggle('active');
                 mobileToggle.classList.toggle('active');
+                
+                // Toggle body scroll lock
+                if (navMenu.classList.contains('active')) {
+                    body.classList.add('menu-open');
+                } else {
+                    body.classList.remove('menu-open');
+                }
             }
         }
 
