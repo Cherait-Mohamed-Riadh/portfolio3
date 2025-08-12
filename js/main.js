@@ -410,7 +410,7 @@
                     'projects.subtitle': 'Showcasing my best work across security, finance, and development',
                     'projects.web.category': 'Web Development',
                     'projects.web.title': 'Enterprise Security Portal',
-                    'projects.web.description': 'A comprehensive security management platform with real-time threat monitoring, incident response, and compliance reporting capabilities.',
+                    'projects.web.description': 'A comprehensive platform for managing and developing websites for individuals and companies.',
                     'projects.financial.category': 'Financial Analysis',
                     'projects.financial.title': 'Algorithmic Trading System',
                     'projects.financial.description': 'Advanced trading algorithms with machine learning integration for forex and cryptocurrency markets.',
