@@ -1,105 +1,491 @@
 /* Main Content Area Specific Styles for Analysis Page */
 main {
     flex-grow: 1;
-    padding: 20px 0;
+    padding: 0; /* Remove default padding for hero section */
 }
 
-.analysis-section {
-    padding: var(--container-padding); /* Use container-padding for consistency */
-}
-
-.analysis-section h2 {
+/* Hero Section Styles */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
     text-align: center;
-    margin-bottom: 30px;
-    color: var(--section-heading-color);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
 }
 
-.analysis-content p {
-    font-size: 1.05em; /* Consistent with other pages' paragraphs */
-    margin-bottom: 1.2em; /* Consistent with other pages' paragraph spacing */
-    color: var(--main-text-color);
-    line-height: 1.7; /* Consistent with other pages' line-height */
-    text-align: justify; /* Consistent with other pages' text alignment */
-    max-width: 800px; /* Consistent with other pages' max-width */
-    margin-left: auto; /* Center paragraphs */
-    margin-right: auto; /* Center paragraphs */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Professional Introduction Section */
+.professional-intro {
+    padding: 80px 0;
+    background: var(--bg-primary);
+}
+
+.intro-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-header {
+    margin-bottom: 3rem;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.professional-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.intro-description {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.intro-description p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.expertise-highlights {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--bg-secondary);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.highlight-item i {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
+
+.highlight-item span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Methodology Section */
+.methodology-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 1rem auto 0;
+}
+
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.methodology-card {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.methodology-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.methodology-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.methodology-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.methodology-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.methodology-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.methodology-features {
+    list-style: none;
+    padding: 0;
+}
+
+.methodology-features li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.methodology-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-green);
+    font-weight: bold;
+}
+
+/* Market Insights Section */
+.market-insights {
+    padding: 80px 0;
+    background: var(--bg-primary);
+}
+
+.insights-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.insight-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.insight-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.insight-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-blue);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 1rem;
+}
+
+.insight-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.insight-content {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Analysis Content Section */
+.analysis-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.analysis-content {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .analysis-points {
-    margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Consistent with project grid in index.html */
-    gap: 30px; /* Consistent with project grid in index.html */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .analysis-point-item {
-    background-color: var(--container-bg); /* Use container-bg for consistency */
-    border-radius: 12px; /* Consistent with project cards in index.html */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* إضافة ظل خفيف واحترافي */
-    padding: 30px; /* Consistent with project cards in index.html */
-    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                background-color 0.5s ease,
-                border-color 0.5s ease,
-                box-shadow 0.35s ease; /* تحديث الانتقال ليشمل الظل */
-    border: 1px solid var(--border-light); /* Consistent with project cards in index.html */
+    background: var(--bg-primary);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
 }
-body.dark-mode .analysis-point-item {
-    border-color: #4A5C6B; /* Consistent with dark mode border color */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* ظل أغمق في الوضع الداكن */
+
+.analysis-point-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
 }
 
 .analysis-point-item:hover {
-    transform: translateY(-12px); /* Consistent with project cards hover in index.html */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* ظل أوضح عند التمرير */
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
-body.dark-mode .analysis-point-item:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* ظل أغمق وأوضح عند التمرير في الوضع الداكن */
-}
-
 
 .analysis-point-item h3 {
-    font-size: 1.8em; /* Consistent with project card headings in index.html */
-    color: var(--primary-blue); /* Consistent with project card headings in index.html */
-    margin-bottom: 15px; /* Consistent with project card headings in index.html */
-    transition: color 0.5s ease;
-    font-weight: 700; /* Consistent with index.html */
-}
-body.dark-mode .analysis-point-item h3 {
-    color: #B3E0FF; /* Consistent with dark mode project card headings */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .analysis-point-item p {
-    font-size: 1.05em; /* Consistent with project card paragraphs in index.html */
-    color: var(--text-medium); /* Consistent with project card paragraphs in index.html */
-    transition: color 0.5s ease;
-    line-height: 1.7; /* Consistent with index.html */
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
-/* Responsive Design (Adjusted for consistency across files) */
+/* Call-to-Action Section */
+.cta-section {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-cta {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary-cta {
+    background: white;
+    color: var(--primary-blue);
+}
+
+.btn-primary-cta:hover {
+    background: var(--gray-100);
+    transform: translateY(-2px);
+}
+
+.btn-secondary-cta {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary-cta:hover {
+    background: white;
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+/* Animation Classes */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
 @media (max-width: 1200px) {
-    .analysis-content p { font-size: 1.2em; } /* Adjusted for more space */
-    .analysis-points { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } /* Consistent with index.html */
-    .analysis-point-item h3 { font-size: 1.7em; } /* Consistent with index.html */
-    .analysis-point-item p { font-size: 1.0em; } /* Consistent with index.html */
+    .hero-title { font-size: 3rem; }
+    .methodology-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .insights-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 }
 
 @media (max-width: 992px) {
-    .analysis-content p { font-size: 1.1em; } /* Adjusted */
-    .analysis-points { grid-template-columns: 1fr; } /* Stack on smaller screens - Consistent with index.html */
-    .analysis-point-item h3 { font-size: 1.6em; } /* Consistent with index.html */
-    .analysis-point-item p { font-size: 0.95em; } /* Consistent with index.html */
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .methodology-grid { grid-template-columns: 1fr; }
+    .insights-grid { grid-template-columns: 1fr; }
+    .expertise-highlights { gap: 1rem; }
 }
 
 @media (max-width: 768px) {
-    .analysis-content p { font-size: 1.0em; }
-    .analysis-point-item { padding: 25px; } /* Consistent with index.html */
-    .analysis-point-item h3 { font-size: 1.5em; } /* Consistent with index.html */
-    .analysis-point-item p { font-size: 0.95em; } /* Consistent with index.html */
+    .hero-section { padding: 60px 0; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-stats { gap: 2rem; }
+    .stat-number { font-size: 2rem; }
+    .professional-intro { padding: 60px 0; }
+    .methodology-section { padding: 60px 0; }
+    .market-insights { padding: 60px 0; }
+    .analysis-section { padding: 60px 0; }
+    .cta-section { padding: 60px 0; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .expertise-highlights { flex-direction: column; align-items: center; }
 }
 
 @media (max-width: 480px) {
-    .analysis-content p { font-size: 0.9em; }
-    .analysis-point-item { padding: 18px; } /* Consistent with index.html */
-    .analysis-point-item h3 { font-size: 1.3em; margin-bottom: 10px; } /* Consistent with index.html */
-    .analysis-point-item p { font-size: 0.9em; margin-bottom: 18px; } /* Consistent with index.html */
+    .hero-title { font-size: 1.8rem; }
+    .hero-subtitle { font-size: 1rem; }
+    .hero-stats { gap: 1.5rem; }
+    .stat-number { font-size: 1.8rem; }
+    .stat-label { font-size: 0.8rem; }
+    .section-heading { font-size: 2rem; }
+    .methodology-card { padding: 1.5rem; }
+    .insight-card { padding: 1.5rem; }
+    .analysis-point-item { padding: 1.5rem; }
+    .btn-cta { padding: 0.875rem 1.5rem; }
 }
