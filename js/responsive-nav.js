@@ -16,7 +16,7 @@
   }
 
   ready(() => {
-    const toggle = qs('#mobileMenuToggle');
+    const toggle = qs('#burger');
     if(!toggle) return;
 
     // Overlay
@@ -80,7 +80,7 @@
       drawer.classList.add('open');
       overlay.classList.add('open');
       document.body.classList.add('no-scroll');
-      toggle.setAttribute('aria-expanded','true');
+      toggle.checked = true;
       // close on link click
     }
 
@@ -88,12 +88,11 @@
       drawer.classList.remove('open');
       overlay.classList.remove('open');
       document.body.classList.remove('no-scroll');
-      toggle.setAttribute('aria-expanded','false');
+      toggle.checked = false;
     }
 
-    toggle.addEventListener('click', (e)=>{
-      e.preventDefault();
-      drawer.classList.contains('open') ? close() : open();
+    toggle.addEventListener('change', (e)=>{
+      e.target.checked ? open() : close();
     });
     overlay.addEventListener('click', close);
     drawer.addEventListener('click', (e)=>{

@@ -206,6 +206,29 @@
         .project-img:hover {
             transform: scale(1.02);
         }
+
+        /* Footer Styles */
+        .main-footer {
+            background: linear-gradient(135deg, #0A1C2B 0%, #1a2a3a 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .main-footer p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -304,11 +327,12 @@
                     </div>
                 </div>
                 
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <label class="burger" for="burger">
+                    <input type="checkbox" id="burger">
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
+                </label>
                 
                 <!-- Mobile Menu Close Button -->
                 <button class="mobile-menu-close" id="mobileMenuClose" style="display: none;">
@@ -367,7 +391,7 @@
                     </div>
                     <div class="site-content">
                         <h3 data-translate="site1Title">Enterprise E-commerce Platform</h3>
-                        <p data-translate="site1Desc">Developed a comprehensive e-commerce solution featuring advanced user authentication, secure payment processing, inventory management, and analytics dashboard. Built with scalability and security as core principles.</p>
+                        <p data-translate="site1Desc">Get a professional e-commerce website with all the modern and professional features to become a successful e-commerce merchant and increase your sales.</p>
                         <div class="project-features">
                             <span class="feature-tag">User Authentication</span>
                             <span class="feature-tag">Payment Processing</span>
@@ -489,6 +513,37 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="site-card">
+                    <div class="projects-gallery">
+                        <img src="image/riadhportfolio.png" alt="Mohammed Riadh Portfolio Screenshot" loading="lazy" width="600" height="400" class="project-img">
+                    </div>
+                    <div class="site-content">
+                        <h3 data-translate="site6Title">Mohamed Riadh Portfolio</h3>
+                        <p data-translate="site6Desc">Of course 😅 As a programmer, I am the one who programmed and developed my portfolio website</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Personal Portfolio</span>
+                            <span class="feature-tag">Custom Development</span>
+                            <span class="feature-tag">Professional Design</span>
+                        </div>
+                        <div class="site-tags">
+                            <i class="fab fa-html5 site-tag-icon" title="HTML5"></i>
+                            <i class="fab fa-css3-alt site-tag-icon" title="CSS3"></i>
+                            <i class="fab fa-js-square site-tag-icon" title="JavaScript"></i>
+                            <i class="fab fa-git-alt site-tag-icon" title="Git"></i>
+                        </div>
+                    </div>
+                    <div class="site-links">
+                        <a href="#!" target="_blank" rel="noopener" data-translate="viewLiveSite" class="primary-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>View Live Site</span>
+                        </a>
+                        <a href="#!" target="_blank" rel="noopener" data-translate="viewCode" class="secondary-link">
+                            <i class="fab fa-github"></i>
+                            <span>View Code</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Professional Call-to-Action -->
@@ -511,8 +566,10 @@
         </section>
     </main>
 
-    <footer>
-        <p data-translate="footerText">&copy; 2025 Mohamed Riadh. All rights reserved.</p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p data-translate="footerText">&copy; 2025 Mohamed Riadh. All rights reserved.</p>
+        </div>
     </footer>
 
     <button id="scrollToTopBtn" class="scroll-top-btn" aria-label="Scroll to top">

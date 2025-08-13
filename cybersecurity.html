@@ -162,6 +162,29 @@
         .project-img:hover {
             transform: scale(1.02);
         }
+
+        /* Footer Styles */
+        .main-footer {
+            background: linear-gradient(135deg, #0A1C2B 0%, #1a2a3a 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .main-footer p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -260,11 +283,12 @@
                     </div>
                 </div>
                 
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <label class="burger" for="burger">
+                    <input type="checkbox" id="burger">
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
+                </label>
                 
                 <!-- Mobile Menu Close Button -->
                 <button class="mobile-menu-close" id="mobileMenuClose" style="display: none;">
@@ -401,8 +425,10 @@
         </section>
     </main>
 
-    <footer>
-        <p data-translate="footerText">&copy; 2025 Mohamed Riadh. All rights reserved.</p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p data-translate="footerText">&copy; 2025 Mohamed Riadh. All rights reserved.</p>
+        </div>
     </footer>
 
     <button id="scrollToTopBtn" class="scroll-top-btn" aria-label="Scroll to top">
