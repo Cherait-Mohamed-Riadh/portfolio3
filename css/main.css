@@ -74,6 +74,12 @@
     --z-modal: 1040;
     --z-popover: 1050;
     --z-tooltip: 1060;
+    
+    /* Theme Toggle Variables */
+    --bg: #ffffff;
+    --primary: #2563eb;
+    --primaryT: rgba(37, 99, 235, 0.2);
+    --transDur: 0.3s;
 }
 
 /* Dark Mode Variables */
@@ -84,6 +90,7 @@
     --text-primary: var(--white);
     --text-secondary: var(--dark-text-secondary);
     --border-color: var(--gray-700);
+    --bg: #0a0a0a;
 }
 
 /* Light Mode Variables */
@@ -270,18 +277,47 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    z-index: 10;
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-fast);
 }
 
 .brand-text {
     font-size: 1.125rem;
     font-weight: 700;
     color: var(--primary-blue);
+    transition: color var(--transition-fast);
 }
 
 .brand-subtitle {
     font-size: 0.7rem;
     color: var(--text-secondary);
     font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+/* Brand link hover and active states */
+.brand-link:hover {
+    color: var(--primary-blue);
+}
+
+.brand-link:hover .brand-text {
+    color: var(--primary-blue);
+}
+
+.brand-link:hover .brand-subtitle {
+    color: var(--text-primary);
+}
+
+.brand-link:active {
+    transform: scale(0.98);
+}
+
+.brand-link:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    z-index: 15;
 }
 
 .nav-menu {
@@ -304,6 +340,7 @@ body {
     transform: scale(1);
     will-change: transform, color;
     cursor: pointer;
+    z-index: 10;
 }
 
 .nav-link i {
@@ -314,6 +351,7 @@ body {
 .nav-link.active {
     color: var(--primary-blue);
     background: rgba(37, 99, 235, 0.1);
+    z-index: 15;
 }
 
 .nav-link::after {
@@ -336,11 +374,13 @@ body {
 /* Enhanced navigation feedback */
 .nav-link:active {
     transform: scale(0.95);
+    z-index: 20;
 }
 
 .nav-link:focus {
     outline: 2px solid var(--primary-blue);
     outline-offset: 2px;
+    z-index: 25;
 }
 
 /* Keyboard navigation indicator */
@@ -356,10 +396,12 @@ body {
     border-radius: var(--radius-sm);
     opacity: 0;
     transition: opacity var(--transition-fast);
+    z-index: 30;
 }
 
 .nav-link:hover[data-keyboard-shortcut]::before {
     opacity: 1;
+    z-index: 35;
 }
 
 .nav-controls {
@@ -368,64 +410,210 @@ body {
     gap: var(--space-md);
 }
 
-/* Theme Toggle */
-.theme-toggle {
-    position: relative;
-    width: 44px;
-    height: 22px;
-    cursor: pointer;
+/* Theme Toggle - New Design */
+.theme {
+  display: flex;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.toggle-track {
-    width: 100%;
-    height: 100%;
-    background: var(--gray-300);
-    border-radius: 12px;
-    position: relative;
-    transition: background var(--transition-normal);
+.theme__fill,
+.theme__icon {
+  transition: 0.3s;
 }
 
-[data-theme="dark"] .toggle-track {
-    background: var(--primary-blue);
+.theme__fill {
+  background-color: var(--bg);
+  display: block;
+  mix-blend-mode: difference;
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  transform: translateX(-100%);
 }
 
-.toggle-thumb {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 18px;
-    height: 18px;
-    background: var(--primary-blue);
-    border-radius: 50%;
-    transition: transform var(--transition-normal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.theme__icon,
+.theme__toggle {
+  z-index: 1;
 }
 
-[data-theme="dark"] .toggle-thumb {
-    transform: translateX(22px);
+.theme__icon,
+.theme__icon-part {
+  position: absolute;
 }
 
-.toggle-thumb i {
-    font-size: 0.75rem;
-    color: var(--gray-600);
+.theme__icon {
+  display: block;
+  top: 0.4em;
+  left: 0.4em;
+  width: 1.2em;
+  height: 1.2em;
 }
 
-.light-icon {
-    display: block;
+.theme__icon-part {
+  border-radius: 50%;
+  box-shadow: 0.3em -0.3em 0 0.4em hsl(0,0%,100%) inset;
+  top: calc(50% - 0.4em);
+  left: calc(50% - 0.4em);
+  width: 0.8em;
+  height: 0.8em;
+  transition: box-shadow var(--transDur) ease-in-out,
+		opacity var(--transDur) ease-in-out,
+		transform var(--transDur) ease-in-out;
+  transform: scale(0.5);
 }
 
-.dark-icon {
-    display: none;
+.theme__icon-part ~ .theme__icon-part {
+  background-color: hsl(0,0%,100%);
+  border-radius: 0.04em;
+  top: 50%;
+  left: calc(50% - 0.04em);
+  transform: rotate(0deg) translateY(0.4em);
+  transform-origin: 50% 0;
+  width: 0.08em;
+  height: 0.16em;
 }
 
-[data-theme="dark"] .light-icon {
-    display: none;
+.theme__icon-part:nth-child(3) {
+  transform: rotate(45deg) translateY(0.45em);
 }
 
-[data-theme="dark"] .dark-icon {
-    display: block;
+.theme__icon-part:nth-child(4) {
+  transform: rotate(90deg) translateY(0.45em);
+}
+
+.theme__icon-part:nth-child(5) {
+  transform: rotate(135deg) translateY(0.45em);
+}
+
+.theme__icon-part:nth-child(6) {
+  transform: rotate(180deg) translateY(0.45em);
+}
+
+.theme__icon-part:nth-child(7) {
+  transform: rotate(225deg) translateY(0.45em);
+}
+
+.theme__icon-part:nth-child(8) {
+  transform: rotate(270deg) translateY(0.5em);
+}
+
+.theme__icon-part:nth-child(9) {
+  transform: rotate(315deg) translateY(0.5em);
+}
+
+.theme__label,
+.theme__toggle,
+.theme__toggle-wrap {
+  position: relative;
+}
+
+.theme__toggle,
+.theme__toggle-wrap {
+  display: block;
+}
+
+.theme__toggle {
+  background-color: hsl(48,90%,85%);
+  border-radius: 25% / 50%;
+  box-shadow: 0 0 0 0.125em var(--primaryT);
+  padding: 0.2em;
+  width: 4.5em;
+  height: 2.5em;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background-color var(--transDur) ease-in-out,
+		box-shadow 0.15s ease-in-out,
+		transform var(--transDur) ease-in-out;
+}
+
+.theme__toggle:before {
+  background-color: hsl(48,90%,55%);
+  border-radius: 50%;
+  content: "";
+  width: 2em;
+  height: 2em;
+  transition: 0.3s;
+}
+
+.theme__toggle:focus {
+  box-shadow: 0 0 0 0.125em var(--primary);
+  outline: transparent;
+}
+
+/* Checked */
+.theme__toggle:checked {
+  background-color: hsl(198,90%,15%);
+}
+
+.theme__toggle:checked:before,
+.theme__toggle:checked ~ .theme__icon {
+  transform: translateX(2.5em);
+}
+
+.theme__toggle:checked:before {
+  background-color: hsl(198,90%,55%);
+}
+
+.theme__toggle:checked ~ .theme__fill {
+  transform: translateX(0);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(1) {
+  box-shadow: 0.15em -0.15em 0 0.15em hsl(0,0%,100%) inset;
+  transform: scale(1);
+  top: 0.15em;
+  left: -0.15em;
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part ~ .theme__icon-part {
+  opacity: 0;
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(2) {
+  transform: rotate(45deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(3) {
+  transform: rotate(90deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(4) {
+  transform: rotate(135deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(5) {
+  transform: rotate(180deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(6) {
+  transform: rotate(225deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(7) {
+  transform: rotate(270deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(8) {
+  transform: rotate(315deg) translateY(0.6em);
+}
+
+.theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(9) {
+  transform: rotate(360deg) translateY(0.6em);
+}
+
+.theme__toggle-wrap {
+  margin: 0 0.75em;
+}
+
+@supports selector(:focus-visible) {
+  .theme__toggle:focus {
+    box-shadow: 0 0 0 0.125em var(--primaryT);
+  }
+
+  .theme__toggle:focus-visible {
+    box-shadow: 0 0 0 0.125em var(--primary);
+  }
 }
 
 /* Language Selector */
@@ -703,6 +891,9 @@ body {
 }
 
 .scroll-top-btn {
+    position: fixed;
+    bottom: 200px; /* أعلى من زر WhatsApp */
+    right: 20px;
     width: 50px;
     height: 50px;
     background: var(--primary-blue);
@@ -711,14 +902,18 @@ body {
     border-radius: 50%;
     cursor: pointer;
     transition: all var(--transition-normal);
-    display: flex;
+    display: none; /* مخفي افتراضياً */
     align-items: center;
     justify-content: center;
+    z-index: 1001; /* أعلى من زر WhatsApp لتجنب التداخل */
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    pointer-events: auto;
 }
 
 .scroll-top-btn:hover {
     background: var(--primary-dark);
     transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -1291,6 +1486,7 @@ body {
 .scroll-top-btn {
     transition: all var(--transition-normal);
     transform: scale(1);
+    z-index: 1001; /* أعلى من زر WhatsApp لتجنب التداخل */
 }
 
 .scroll-top-btn:hover {
@@ -1298,6 +1494,7 @@ body {
 }
 
 .scroll-top-btn.show {
+    display: flex !important; /* يظهر عند إضافة class show */
     animation: bounceIn 0.6s ease-out;
 }
 
@@ -1614,7 +1811,7 @@ body {
     position: fixed;
     bottom: 120px;
     right: 20px;
-    z-index: 1000;
+    z-index: 999; /* أقل من زر العودة للأعلى */
     transition: all 0.3s ease;
 }
 
@@ -1688,7 +1885,14 @@ body {
     .whatsapp-button {
         bottom: 100px;
         right: var(--space-md);
-        z-index: 999; /* Ensure it's below other elements */
+        z-index: 998; /* أقل من زر العودة للأعلى */
+    }
+    
+    .scroll-top-btn {
+        bottom: 180px; /* أعلى من زر WhatsApp في الشاشات الصغيرة */
+        right: var(--space-md);
+        width: 45px;
+        height: 45px;
     }
     
     .whatsapp-button a {
@@ -2905,13 +3109,55 @@ body {
     }
     
     [data-theme="dark"] .nav-link {
-        color: var(--gray-200);
-    }
-    
-    [data-theme="dark"] .nav-link:hover {
-        color: var(--primary-blue);
-        background: var(--gray-800);
-    }
+    color: var(--gray-200);
+    z-index: 10;
+    position: relative;
+}
+
+[data-theme="dark"] .nav-link:hover {
+    color: var(--primary-blue);
+    background: var(--gray-800);
+}
+
+[data-theme="dark"] .nav-link:active {
+    color: var(--primary-blue);
+    background: var(--gray-700);
+}
+
+[data-theme="dark"] .nav-link.active {
+    color: var(--primary-blue);
+    background: var(--gray-800);
+}
+
+/* Dark theme brand link fixes */
+[data-theme="dark"] .brand-link {
+    color: var(--text-primary);
+    z-index: 10;
+    position: relative;
+}
+
+[data-theme="dark"] .brand-link:hover {
+    color: var(--primary-blue);
+}
+
+[data-theme="dark"] .brand-link:hover .brand-text {
+    color: var(--primary-blue);
+}
+
+[data-theme="dark"] .brand-link:hover .brand-subtitle {
+    color: var(--gray-300);
+}
+
+[data-theme="dark"] .brand-link:active {
+    color: var(--primary-blue);
+    transform: scale(0.98);
+}
+
+[data-theme="dark"] .brand-link:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    z-index: 15;
+}
 }
 
 /* Enhanced mobile floating elements */
@@ -3448,7 +3694,7 @@ body {
     
     /* Ensure proper spacing for mobile menu items */
     .nav-menu.active .nav-link,
-    .nav-menu.active .theme-toggle,
+    .nav-menu.active .theme,
     .nav-menu.active .language-selector {
         margin: 0;
         border-radius: 0;
@@ -3502,7 +3748,7 @@ body {
     }
     
     /* Add theme toggle and language selector to mobile menu */
-    .nav-menu.active .theme-toggle,
+    .nav-menu.active .theme,
     .nav-menu.active .language-selector {
         display: flex;
         justify-content: center;
@@ -3512,7 +3758,7 @@ body {
         margin: 0;
     }
     
-    .nav-menu.active .theme-toggle {
+    .nav-menu.active .theme {
         order: -1; /* Place theme toggle at the top of mobile menu */
         border-top: 1px solid var(--border-color);
     }
@@ -3523,12 +3769,12 @@ body {
     }
     
     /* Style theme toggle in mobile menu */
-    .nav-menu.active .theme-toggle .toggle-track {
+    .nav-menu.active .theme .toggle-track {
         width: 60px;
         height: 30px;
     }
     
-    .nav-menu.active .theme-toggle .toggle-thumb {
+    .nav-menu.active .theme .toggle-thumb {
         width: 26px;
         height: 26px;
     }
@@ -3564,7 +3810,7 @@ body {
     }
     
     /* Hide theme toggle and language selector in top bar on mobile */
-    .nav-controls .theme-toggle,
+    .nav-controls .theme,
     .nav-controls .language-selector {
         display: none;
     }
@@ -3721,7 +3967,7 @@ body {
     }
     
     /* Enhanced mobile theme toggle */
-    .theme-toggle {
+    .theme {
         width: 44px;
         height: 44px;
         border-radius: var(--radius-lg);
@@ -3734,7 +3980,7 @@ body {
         transition: all var(--transition-fast);
     }
     
-    .theme-toggle:hover {
+    .theme:hover {
         background: var(--primary-blue);
         border-color: var(--primary-blue);
         transform: scale(1.05);
@@ -4147,7 +4393,7 @@ body {
     }
 
     /* Mobile theme toggle */
-    .theme-toggle {
+    .theme {
         width: 2.5rem;
         height: 1.5rem;
     }
@@ -4317,17 +4563,17 @@ body {
     }
 
     /* Mobile theme toggle in menu */
-    .nav-menu.active .theme-toggle {
+    .nav-menu.active .theme {
         margin-top: 2rem;
         transform: scale(1.2);
     }
 
-    .nav-menu.active .theme-toggle .toggle-track {
+    .nav-menu.active .theme .toggle-track {
         background: var(--mobile-bg-secondary);
         border-color: var(--mobile-border-color);
     }
 
-    .nav-menu.active .theme-toggle .toggle-thumb {
+    .nav-menu.active .theme .toggle-thumb {
         background: var(--mobile-accent-blue);
     }
 
@@ -4381,7 +4627,7 @@ body {
     }
 
     /* Hide desktop controls on mobile */
-    .nav-controls .theme-toggle,
+    .nav-controls .theme,
     .nav-controls .language-selector {
         display: none;
     }
@@ -5688,7 +5934,7 @@ body {
     .nav-link i { font-size: 1rem; }
   
     /* أدوات الوضع واللغة داخل القائمة بشكل مصغّر */
-    .nav-menu .theme-toggle { align-self: flex-start; margin-bottom: var(--space-md); }
+    .nav-menu .theme { align-self: flex-start; margin-bottom: var(--space-md); }
     .nav-menu .language-selector { align-self: flex-start; margin-bottom: var(--space-md); }
   
     /* قفل تمScroll الصفحة عند فتح المنيو */
@@ -5791,7 +6037,7 @@ body {
     }
   
     /* عناصر التحويل للّيل/اللغة أعلى القائمة */
-    .nav-menu .theme-toggle,
+    .nav-menu .theme,
     .nav-menu .language-selector {
       align-self: stretch;
       margin-bottom: var(--space-sm);
@@ -5909,7 +6155,7 @@ body {
   
     /* أزرار اللغة/الوضع بنفس موضع الديسكتوب على اليمين */
     .nav-controls .language-btn { height: 36px; }
-    .nav-controls .theme-toggle { transform: translateY(1px); }
+    .nav-controls .theme { transform: translateY(1px); }
   
     /* منع أي فراغ/اسود يمين الشاشة */
     html, body, .navbar, .nav-container { max-width: 100vw; overflow-x: hidden; }
@@ -6099,7 +6345,7 @@ body {
     #navMenu.open { right: 0; opacity: 1; pointer-events: auto; }
   
     /* إخفاء عناصر غير أساسية داخل الدرج */
-    #navMenu .theme-toggle,
+    #navMenu .theme,
     #navMenu .language-selector { display: none !important; }
   
     /* شكل الروابط داخل الدرج */
@@ -6210,7 +6456,7 @@ body {
     }
   
     /* إخفاء عناصر غير أساسية */
-    #navMenu .theme-toggle,
+    #navMenu .theme,
     #navMenu .language-selector { display: none !important; }
   
     body.no-scroll { overflow: hidden; height: 100vh; }
@@ -6305,7 +6551,7 @@ body {
     #navMenu .nav-link::after { display: none !important; } /* لا نحتاج خط سفلي هنا */
   
     /* أخفِ عناصر غير أساسية داخل المودال */
-    #navMenu .theme-toggle,
+    #navMenu .theme,
     #navMenu .language-selector { display: none !important; }
   }
 /* ==== VIDEO MODAL (force top z-index) ==== */
@@ -6415,7 +6661,7 @@ body {
     #navMenu .nav-link::after{display:none!important} /* لا حاجة للخط السفلي داخل المودال */
   
     /* اخفِ غير الأساسي داخل المودال */
-    #navMenu .theme-toggle, #navMenu .language-selector{display:none!important}
+    #navMenu .theme, #navMenu .language-selector{display:none!important}
   
     /* منع تمرير الصفحة عند الفتح */
     body.no-scroll{overflow:hidden;height:100dvh;touch-action:none}

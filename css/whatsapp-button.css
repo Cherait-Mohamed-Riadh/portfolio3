@@ -1,0 +1,116 @@
+/* WhatsApp Button Styles */
+.whatsapp-button {
+    position: fixed !important;
+    bottom: 120px !important;
+    right: 20px !important;
+    z-index: 998 !important; /* أقل من زر العودة للأعلى */
+    transition: all 0.3s ease !important;
+    pointer-events: auto !important;
+}
+
+.whatsapp-button a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: #25d366 !important;
+    color: white !important;
+    padding: 16px 24px !important;
+    border-radius: 12px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.whatsapp-button a:hover {
+    background: #128c7e !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4) !important;
+}
+
+.whatsapp-button i {
+    font-size: 1.5rem !important;
+}
+
+.whatsapp-text {
+    font-size: 0.875rem !important;
+    white-space: nowrap !important;
+}
+
+.whatsapp-tooltip {
+    position: absolute !important;
+    right: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: #1f2937 !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    font-size: 0.75rem !important;
+    white-space: nowrap !important;
+    margin-right: 16px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+    z-index: 999 !important;
+}
+
+.whatsapp-tooltip::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border: 5px solid transparent !important;
+    border-left-color: #1f2937 !important;
+}
+
+.whatsapp-button:hover .whatsapp-tooltip {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .whatsapp-button {
+        bottom: 100px !important;
+        right: 16px !important;
+        z-index: 998 !important;
+    }
+    
+    .whatsapp-button a {
+        padding: 8px !important;
+        font-size: 0.8rem !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+    }
+    
+    .whatsapp-text {
+        display: none !important;
+    }
+    
+    .whatsapp-button a {
+        width: 56px !important;
+        height: 56px !important;
+        border-radius: 50% !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3) !important;
+    }
+    
+    .whatsapp-tooltip {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-button {
+        bottom: 80px !important;
+        right: 12px !important;
+    }
+    
+    .whatsapp-button a {
+        width: 48px !important;
+        height: 48px !important;
+    }
+}

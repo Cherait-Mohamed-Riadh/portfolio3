@@ -131,9 +131,9 @@
         // Event Listeners
         setupEventListeners() {
             // Theme toggle
-            const themeToggle = utils.safeQuerySelector('#themeToggle');
-            if (themeToggle) {
-                utils.safeAddEventListener(themeToggle, 'click', () => this.toggleTheme());
+            const themeToggleInput = utils.safeQuerySelector('#theme');
+            if (themeToggleInput) {
+                utils.safeAddEventListener(themeToggleInput, 'change', () => this.toggleTheme());
             }
 
             // Language selector
@@ -269,9 +269,9 @@
             localStorage.setItem('theme', theme);
             
             // Update theme toggle UI
-            const themeToggle = utils.safeQuerySelector('#themeToggle');
-            if (themeToggle) {
-                themeToggle.setAttribute('data-theme', theme);
+            const themeToggleInput = utils.safeQuerySelector('#theme');
+            if (themeToggleInput) {
+                themeToggleInput.checked = theme === 'dark';
             }
         }
 
