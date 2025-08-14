@@ -162,6 +162,304 @@
         .project-img:hover {
             transform: scale(1.02);
         }
+
+        /* Enhanced Analysis Page Styles */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .methodology-section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .methodology-card {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methodology-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .methodology-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .methodology-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .methodology-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .methodology-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .methodology-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .methodology-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+        }
+
+        .market-insights {
+            padding: 80px 0;
+            background: var(--bg-primary);
+        }
+
+        .insights-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .insight-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .insight-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .insight-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .insight-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .insight-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary-cta {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        .btn-primary-cta:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary-cta {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary-cta:hover {
+            background: white;
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -276,19 +574,29 @@
     </nav>
 
     <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title fade-in-up" data-translate="analysisHeroTitle">Financial Market Analysis</h1>
+                    <p class="hero-subtitle fade-in-up stagger-item" data-translate="analysisHeroSubtitle">Professional insights and strategic analysis for modern financial markets. Combining technical expertise with fundamental understanding to deliver actionable trading insights.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Professional Introduction Section -->
         <section class="professional-intro container in-view">
             <div class="intro-content">
                 <div class="intro-header">
-                    <h2 class="section-heading professional-heading fade-in-up" data-translate="analysisHeading">Financial Market Analysis & Trading Insights</h2>
+                    <h2 class="section-heading professional-heading fade-in-up" data-translate="analysisHeading">Comprehensive Market Analysis Approach</h2>
                     <div class="professional-badge fade-in">
                         <i class="fas fa-chart-line"></i>
-                        <span>Market Analysis</span>
+                        <span>Expert Analysis</span>
                     </div>
                 </div>
                 <div class="intro-description">
-                    <p class="fade-in-up stagger-item" data-translate="analysisIntro1">Welcome to my dedicated page for financial market analysis. Here, I share insights, methodologies, and observations on various markets, including Forex, Cryptocurrencies, and Traditional Equities. My approach is data-driven, combining technical analysis with fundamental understanding to identify potential opportunities and manage risk effectively.</p>
-                    <p class="fade-in-up stagger-item" data-translate="analysisIntro2">I believe that consistent, disciplined analysis is key to navigating the complexities of the financial world. This section offers a glimpse into my daily routine and thought process as I interpret market movements and trends.</p>
+                    <p class="fade-in-up stagger-item" data-translate="analysisIntro1">My approach to financial market analysis is built on a foundation of rigorous methodology, combining multiple analytical frameworks to create a comprehensive understanding of market dynamics. I employ both quantitative and qualitative analysis techniques to identify opportunities and manage risk effectively.</p>
+                    <p class="fade-in-up stagger-item" data-translate="analysisIntro2">Through systematic analysis of market data, economic indicators, and behavioral patterns, I develop insights that help navigate the complexities of global financial markets with confidence and precision.</p>
                 </div>
                 <div class="expertise-highlights">
                     <div class="highlight-item fade-in-up stagger-item">
@@ -306,6 +614,120 @@
                     <div class="highlight-item fade-in-up stagger-item">
                         <i class="fas fa-calculator"></i>
                         <span>Data-Driven</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section class="methodology-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-heading fade-in-up">Analytical Methodology</h2>
+                    <p class="section-subtitle fade-in-up stagger-item">A systematic approach to market analysis that combines multiple frameworks for comprehensive insights</p>
+                </div>
+                
+                <div class="methodology-grid">
+                    <div class="methodology-card fade-in-up stagger-item">
+                        <div class="methodology-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="methodology-title">Technical Analysis</h3>
+                        <p class="methodology-description">Advanced chart analysis using multiple timeframes, key indicators, and pattern recognition to identify entry and exit points.</p>
+                        <ul class="methodology-features">
+                            <li>Multi-timeframe analysis</li>
+                            <li>Support & resistance levels</li>
+                            <li>Trend identification</li>
+                            <li>Volume analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methodology-card fade-in-up stagger-item">
+                        <div class="methodology-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3 class="methodology-title">Fundamental Analysis</h3>
+                        <p class="methodology-description">Comprehensive evaluation of economic indicators, company fundamentals, and market sentiment to understand underlying value.</p>
+                        <ul class="methodology-features">
+                            <li>Economic indicators</li>
+                            <li>Company fundamentals</li>
+                            <li>Market sentiment</li>
+                            <li>Geopolitical factors</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methodology-card fade-in-up stagger-item">
+                        <div class="methodology-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="methodology-title">Risk Management</h3>
+                        <p class="methodology-description">Systematic approach to position sizing, stop-loss placement, and portfolio diversification to protect capital.</p>
+                        <ul class="methodology-features">
+                            <li>Position sizing</li>
+                            <li>Stop-loss strategies</li>
+                            <li>Portfolio diversification</li>
+                            <li>Risk-reward ratios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Insights Section -->
+        <section class="market-insights">
+            <div class="container">
+                <div class="insights-header">
+                    <h2 class="section-heading fade-in-up">Market Insights & Strategies</h2>
+                    <p class="section-subtitle fade-in-up stagger-item">Key areas of focus and strategic approaches for different market conditions</p>
+                </div>
+                
+                <div class="insights-grid">
+                    <div class="insight-card fade-in-up stagger-item">
+                        <div class="insight-header">
+                            <div class="insight-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3 class="insight-title">Technical Indicators & Price Action</h3>
+                        </div>
+                        <div class="insight-content">
+                            <p>Deep dive into charts using various indicators (RSI, MACD, Bollinger Bands) combined with pure price action analysis to spot key support/resistance levels, trend lines, and chart patterns.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card fade-in-up stagger-item">
+                        <div class="insight-header">
+                            <div class="insight-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="insight-title">Macroeconomic Factors</h3>
+                        </div>
+                        <div class="insight-content">
+                            <p>Consideration of global economic news, central bank policies, inflation data, and geopolitical events that influence market sentiment and long-term trends.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card fade-in-up stagger-item">
+                        <div class="insight-header">
+                            <div class="insight-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3 class="insight-title">Risk Management & Position Sizing</h3>
+                        </div>
+                        <div class="insight-content">
+                            <p>Emphasis on proper risk-reward ratios, setting stop-losses, and calculating optimal position sizes to protect capital and ensure sustainable growth.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card fade-in-up stagger-item">
+                        <div class="insight-header">
+                            <div class="insight-icon">
+                                <i class="fas fa-bitcoin"></i>
+                            </div>
+                            <h3 class="insight-title">Crypto Market Specifics</h3>
+                        </div>
+                        <div class="insight-content">
+                            <p>Analysis of blockchain fundamentals, network activity, regulatory developments, and unique on-chain metrics affecting cryptocurrency valuations.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -333,18 +755,20 @@
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Professional Call-to-Action -->
-            <div class="professional-cta">
+        <!-- Call-to-Action Section -->
+        <section class="cta-section">
+            <div class="container">
                 <div class="cta-content">
-                    <h3>Ready to Explore More Projects?</h3>
-                    <p>Discover my complete portfolio of web development, cybersecurity, and financial analysis projects.</p>
+                    <h2 class="fade-in-up">Ready to Explore More Projects?</h2>
+                    <p class="fade-in-up stagger-item">Discover my complete portfolio of web development, cybersecurity, and financial analysis projects.</p>
                     <div class="cta-buttons">
-                        <a href="index.html#projects" class="btn btn-primary">
+                        <a href="index.html#projects" class="btn-cta btn-primary-cta fade-in-up stagger-item">
                             <i class="fas fa-briefcase"></i>
                             <span>View All Projects</span>
                         </a>
-                        <a href="contact.html" class="btn btn-secondary">
+                        <a href="contact.html" class="btn-cta btn-secondary-cta fade-in-up stagger-item">
                             <i class="fas fa-envelope"></i>
                             <span>Get in Touch</span>
                         </a>
@@ -378,7 +802,7 @@
 
     <!-- Floating WhatsApp Button -->
     <div class="whatsapp-button" id="whatsappButton">
-                            <a href="https://wa.me/213549050906" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <a href="https://wa.me/213549050906" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
             <span class="whatsapp-text">Chat on WhatsApp</span>
         </a>

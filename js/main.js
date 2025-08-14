@@ -1157,6 +1157,7 @@
 
         animateCounter(element) {
             const target = parseInt(element.getAttribute('data-target'));
+            const suffix = element.getAttribute('data-suffix') || '';
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
@@ -1167,7 +1168,7 @@
                     current = target;
                     clearInterval(timer);
                 }
-                element.textContent = Math.floor(current);
+                element.textContent = Math.floor(current) + suffix;
             }, 16);
         }
 
