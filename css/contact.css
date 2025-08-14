@@ -1,5 +1,150 @@
 /* ===== CONTACT PAGE SPECIFIC STYLES ===== */
 
+/* Global mobile form styles - Force white text on dark background */
+@media (max-width: 1024px) {
+    /* Target the actual form class used in HTML */
+    .form .form-group input,
+    .form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .form .form-group input::placeholder,
+    .form .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    .form .form-group input:focus,
+    .form .form-group textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+    
+    /* Override any inherited styles */
+    .form .form-group input[type="text"],
+    .form .form-group input[type="email"],
+    .form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* Force override for all browsers */
+    .form .form-group input,
+    .form .form-group textarea {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        -webkit-text-fill-color: white !important;
+        -webkit-text-color: white !important;
+        -webkit-color: white !important;
+        color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* iOS Safari specific overrides */
+    @supports (-webkit-touch-callout: none) {
+        .form .form-group input,
+        .form .form-group textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+    
+    /* Android Chrome specific overrides */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        .form .form-group input,
+        .form .form-group textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+}
+
+/* Also keep the original contact-form styles for backward compatibility */
+@media (max-width: 1024px) {
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .contact-form .form-group input::placeholder,
+    .contact-form .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    .contact-form .form-group input:focus,
+    .contact-form .form-group textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+    
+    /* Override any inherited styles */
+    .contact-form .form-group input[type="text"],
+    .contact-form .form-group input[type="email"],
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* Force override for all browsers */
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        -webkit-text-fill-color: white !important;
+        -webkit-text-color: white !important;
+        -webkit-color: white !important;
+        color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* iOS Safari specific overrides */
+    @supports (-webkit-touch-callout: none) {
+        .contact-form .form-group input,
+        .contact-form .form-group textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+    
+    /* Android Chrome specific overrides */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        .contact-form .form-group input,
+        .contact-form .form-group textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+}
+
 /* Contact Hero Section */
 .contact-hero-section {
     position: relative;
@@ -313,6 +458,64 @@
     box-shadow: var(--shadow-lg);
 }
 
+/* Force mobile styles for form inputs - Override all other styles */
+@media (max-width: 1024px) {
+    /* Target both form classes for maximum compatibility */
+    .form .form-group input,
+    .form .form-group textarea,
+    .form-group input,
+    .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    .form .form-group input::placeholder,
+    .form .form-group textarea::placeholder,
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    .form .form-group input:focus,
+    .form .form-group textarea:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+    
+    /* Override any inherited styles */
+    .form .form-group input[type="text"],
+    .form .form-group input[type="email"],
+    .form .form-group textarea,
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* Additional specificity for mobile devices */
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+}
+
 .form-group {
     position: relative;
     margin-bottom: 2rem;
@@ -328,6 +531,69 @@
     background: var(--bg-primary);
     color: var(--text-primary);
     transition: all 0.3s ease;
+}
+
+/* Mobile-specific styles for form inputs - White text on mobile */
+@media (max-width: 768px) {
+    /* Target both form classes for maximum compatibility */
+    .form .form-group input,
+    .form .form-group textarea,
+    .form-group input,
+    .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .form .form-group input::placeholder,
+    .form .form-group textarea::placeholder,
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    /* Ensure text is white when typing on mobile */
+    .form .form-group input:focus,
+    .form .form-group textarea:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+    
+    /* For iOS Safari compatibility */
+    .form .form-group input,
+    .form .form-group textarea,
+    .form-group input,
+    .form-group textarea {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    /* Additional specificity for mobile */
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* Force override for all input types */
+    .contact-form .form-group input[type="text"],
+    .contact-form .form-group input[type="email"],
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
 }
 
 .form-group input:focus,
@@ -485,6 +751,23 @@
         grid-template-columns: 1fr;
         gap: 3rem;
     }
+    
+    /* Ensure white text on tablets and small laptops */
+    .form .form-group input,
+    .form .form-group textarea,
+    .form-group input,
+    .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+    }
+    
+    .form .form-group input::placeholder,
+    .form .form-group textarea::placeholder,
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -532,9 +815,52 @@
         padding: 1.5rem;
     }
     
+    /* Target both form classes for maximum compatibility */
+    .form .form-group input,
+    .form .form-group textarea,
     .form-group input,
     .form-group textarea {
         padding: 0.875rem 1.25rem;
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .form .form-group input::placeholder,
+    .form .form-group textarea::placeholder,
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    .form .form-group input:focus,
+    .form .form-group textarea:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+    
+    /* Additional specificity for small screens */
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    /* Force override for all input types on small screens */
+    .contact-form .form-group input[type="text"],
+    .contact-form .form-group input[type="email"],
+    .contact-form .form-group textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
     }
 }
 
@@ -571,6 +897,105 @@
 [data-theme="dark"] .social-link {
     background: var(--dark-surface);
     border-color: var(--gray-700);
+}
+
+/* Additional Mobile Form Overrides - Ensure white text on all mobile devices */
+@media (max-width: 1024px) {
+    /* Universal form input styling for mobile */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    input[type="tel"]::placeholder,
+    textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Force white text on very small screens */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    input[type="tel"]::placeholder,
+    textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 1024px) {
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    @media (max-width: 1024px) {
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
 }
 
 

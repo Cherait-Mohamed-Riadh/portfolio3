@@ -71,6 +71,183 @@
     <!-- Enhanced Chatbot CSS - Advanced AI chatbot styling -->
     <link rel="stylesheet" href="css/enhanced-chatbot.css">
     
+    <!-- Custom CSS for Mobile Form Inputs -->
+    <style>
+        /* Force white text on dark background for mobile devices */
+        @media (max-width: 1024px) {
+            /* Target the actual form class used in HTML */
+            .form .form-group input,
+            .form .form-group textarea,
+            .contact-form .form-group input,
+            .contact-form .form-group textarea {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #1a1a1a !important;
+                border-color: #3b82f6 !important;
+                -webkit-appearance: none !important;
+                -moz-appearance: none !important;
+                appearance: none !important;
+            }
+            
+            .form .form-group input::placeholder,
+            .form .form-group textarea::placeholder,
+            .contact-form .form-group input::placeholder,
+            .contact-form .form-group textarea::placeholder {
+                color: rgba(255, 255, 255, 0.7) !important;
+                -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+            }
+            
+            .form .form-group input:focus,
+            .form .form-group textarea:focus,
+            .contact-form .form-group input:focus,
+            .contact-form .form-group textarea:focus {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #2a2a2a !important;
+                border-color: #60a5fa !important;
+                box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+            }
+            
+            /* Override any inherited styles */
+            .form .form-group input[type="text"],
+            .form .form-group input[type="email"],
+            .form .form-group textarea,
+            .contact-form .form-group input[type="text"],
+            .contact-form .form-group input[type="email"],
+            .contact-form .form-group textarea {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #1a1a1a !important;
+                border-color: #3b82f6 !important;
+            }
+            
+            /* Universal input styling for mobile */
+            input[type="text"],
+            input[type="email"],
+            textarea {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #1a1a1a !important;
+                border-color: #3b82f6 !important;
+            }
+        }
+        
+        /* Additional specificity for very small screens */
+        @media (max-width: 480px) {
+            .form .form-group input,
+            .form .form-group textarea,
+            .contact-form .form-group input,
+            .contact-form .form-group textarea {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #1a1a1a !important;
+                border-color: #3b82f6 !important;
+            }
+            
+            /* Universal input styling for very small screens */
+            input[type="text"],
+            input[type="email"],
+            textarea {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #1a1a1a !important;
+                border-color: #3b82f6 !important;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            @media (max-width: 1024px) {
+                .form .form-group input,
+                .form .form-group textarea,
+                .contact-form .form-group input,
+                .contact-form .form-group textarea,
+                input[type="text"],
+                input[type="email"],
+                textarea {
+                    -webkit-text-fill-color: white !important;
+                    color: white !important;
+                    background: #1a1a1a !important;
+                    border-color: #3b82f6 !important;
+                }
+            }
+        }
+        
+        /* Android Chrome specific fixes */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+            @media (max-width: 1024px) {
+                .form .form-group input,
+                .form .form-group textarea,
+                .contact-form .form-group input,
+                .contact-form .form-group textarea,
+                input[type="text"],
+                input[type="email"],
+                textarea {
+                    -webkit-text-fill-color: white !important;
+                    color: white !important;
+                    background: #1a1a1a !important;
+                    border-color: #3b82f6 !important;
+                }
+            }
+        }
+        
+        /* Force override for all form elements on mobile */
+        @media (max-width: 1024px) {
+            /* Target all possible form selectors */
+            .form input,
+            .form textarea,
+            .contact-form input,
+            .contact-form textarea,
+            .form-group input,
+            .form-group textarea,
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            textarea {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #1a1a1a !important;
+                border-color: #3b82f6 !important;
+                -webkit-appearance: none !important;
+                -moz-appearance: none !important;
+                appearance: none !important;
+            }
+            
+            /* Force placeholder text color */
+            .form input::placeholder,
+            .form textarea::placeholder,
+            .contact-form input::placeholder,
+            .contact-form textarea::placeholder,
+            .form-group input::placeholder,
+            .form-group textarea::placeholder,
+            input[type="text"]::placeholder,
+            input[type="email"]::placeholder,
+            input[type="tel"]::placeholder,
+            textarea::placeholder {
+                color: rgba(255, 255, 255, 0.7) !important;
+                -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+            }
+            
+            /* Force focus state */
+            .form input:focus,
+            .form textarea:focus,
+            .contact-form input:focus,
+            .contact-form textarea:focus,
+            .form-group input:focus,
+            .form-group textarea:focus,
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="tel"]:focus,
+            textarea:focus {
+                color: white !important;
+                -webkit-text-fill-color: white !important;
+                background: #2a2a2a !important;
+                border-color: #60a5fa !important;
+                box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+            }
+        }
+    </style>
+    
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -585,5 +762,48 @@
     <script src="js/responsive-nav.js"></script>
     <!-- Enhanced AI Chatbot Script - Advanced intelligence and better UX -->
     <script src="js/enhanced-chatbot.js"></script>
+    
+    <!-- Force Mobile Form Styling Script -->
+    <script>
+        // Force mobile form styling
+        function applyMobileFormStyles() {
+            if (window.innerWidth <= 1024) {
+                const inputs = document.querySelectorAll('.contact-form .form-group input, .contact-form .form-group textarea');
+                inputs.forEach(input => {
+                    input.style.color = 'white';
+                    input.style.webkitTextFillColor = 'white';
+                    input.style.background = '#1a1a1a';
+                    input.style.borderColor = '#3b82f6';
+                    input.style.webkitAppearance = 'none';
+                    input.style.mozAppearance = 'none';
+                    input.style.appearance = 'none';
+                });
+                
+                // Apply focus styles
+                inputs.forEach(input => {
+                    input.addEventListener('focus', function() {
+                        this.style.background = '#2a2a2a';
+                        this.style.borderColor = '#60a5fa';
+                        this.style.boxShadow = '0 0 0 3px rgba(96, 165, 250, 0.2)';
+                    });
+                    
+                    input.addEventListener('blur', function() {
+                        this.style.background = '#1a1a1a';
+                        this.style.borderColor = '#3b82f6';
+                        this.style.boxShadow = 'none';
+                    });
+                });
+            }
+        }
+        
+        // Apply styles on load and resize
+        document.addEventListener('DOMContentLoaded', applyMobileFormStyles);
+        window.addEventListener('resize', applyMobileFormStyles);
+        
+        // Force apply every second for mobile devices
+        if (window.innerWidth <= 1024) {
+            setInterval(applyMobileFormStyles, 1000);
+        }
+    </script>
 </body>
 </html>

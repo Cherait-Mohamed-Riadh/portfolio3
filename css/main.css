@@ -6708,3 +6708,124 @@ body {
       }
   }
   
+/* ===== MOBILE FORM INPUT FIXES - WHITE TEXT ON DARK BACKGROUND ===== */
+@media (max-width: 1024px) {
+    /* Universal form input styling for mobile devices */
+    .form input,
+    .form textarea,
+    .contact-form input,
+    .contact-form textarea,
+    .form-group input,
+    .form-group textarea,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    /* Force placeholder text color */
+    .form input::placeholder,
+    .form textarea::placeholder,
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder,
+    .form-group input::placeholder,
+    .form-group textarea::placeholder,
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    input[type="tel"]::placeholder,
+    textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    
+    /* Force focus state */
+    .form input:focus,
+    .form textarea:focus,
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .form-group input:focus,
+    .form-group textarea:focus,
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #2a2a2a !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Force white text on very small screens */
+    .form input,
+    .form textarea,
+    .contact-form input,
+    .contact-form textarea,
+    .form-group input,
+    .form-group textarea,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        background: #1a1a1a !important;
+        border-color: #3b82f6 !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 1024px) {
+        .form input,
+        .form textarea,
+        .contact-form input,
+        .contact-form textarea,
+        .form-group input,
+        .form-group textarea,
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    @media (max-width: 1024px) {
+        .form input,
+        .form textarea,
+        .contact-form input,
+        .contact-form textarea,
+        .form-group input,
+        .form-group textarea,
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+            background: #1a1a1a !important;
+            border-color: #3b82f6 !important;
+        }
+    }
+}
+  
